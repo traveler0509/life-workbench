@@ -1,0 +1,35 @@
+# 系统文件
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# 编辑器 / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Office 临时文件
+~$*
+
+# 临时与日志
+*.tmp
+*.log
+*.bak
+
+# 本地测试脚本
+_check.js
+_smoke.js
+_*.js
+
+# 工作区元数据（不提交）
+.workbuddy-ai/
+.workbuddy/
+
+# 个人导出的备份数据（不应提交）
+*备份_*.json
+*_backup_*.json
