@@ -28,7 +28,7 @@
 |---|---|---|
 | 今日概览 | 启用 | 四维生活指数、时间进度、今天要处理、近 30 天节奏、本周小结、最近动态 |
 | 习惯健康 | 启用 | 三种打卡方式、30 天热力图、加权近因评分 |
-| 减脂健身 | 启用 | 体重体脂、7 日均线、BMI、目标进度、预计达成、热量缺口、周计划 |
+| 减脂健身 | 启用 | 体重体脂、7 日均线、BMI、目标进度、训练记录与容量趋势、动作进步、热量缺口、周计划 |
 | 待买清单 | 启用 | 优先级分组、金额合计、类别分布 |
 | 书影音收藏 | 启用 | 状态/星级/短评、封面墙与列表、年度小结 |
 | 数据与设置 | 启用 | 个人参数、模块状态、备份恢复 |
@@ -47,6 +47,7 @@
   checkins: { [habitId]: { 'YYYY-MM-DD': number } },
   weights:  [{ id, date, weight, fat }],
   intake:   [{ id, date, kcal }],
+  workouts: [{ id, date, spot, name, sets, reps, weight, dur, kcal, note }],
   shopping: [{ id, name, price, cat, pri, bought, boughtAt }],
   media:    [{ id, type:'book'|'movie'|'music', title, creator, year, status, rating, review, cover, date }],
   money:    [],   // 已移除模块，仅保留数据
@@ -78,6 +79,29 @@
 - 所有交互走 `document` 上的 `data-act` 委托，不逐个绑定
 - `<select>` / `<input>` 走 `change` / `input` 监听，不走 click
 - 表单统一用 `openForm({fields})`，字段类型：text / number / select / textarea / stars / color
+
+## 训练记录（健身模块核心）
+
+`DB.workouts` 是本项目里唯一「复杂」的数据结构，几条规则：
+
+**容量（volume）** = `sets × reps × weight`，单位为 kg。有氧类 `sets/reps/weight` 为 0，容量计 0。
+
+**运动消耗 `burnOf(date)`** 三级回退，避免重复计算：
+1. 记录里显式填了 `kcal` → 直接用
+2. 没填但有时长 → `时长(分钟) × MET`（有氧 9.2 / 力量 6.4）
+3. 什么都没有 → 0
+
+**热量缺口公式**：
+```
+缺口 = TDEE(基础消耗) + 运动消耗 − 摄入
+```
+> 注意早期版本只有 `TDEE − 摄入`，漏了运动项。改公式时 `intakeStats().sumDef` 要一起改，它负责近 7 日累计。
+
+**`weekRange(ref)` 必须传基准日**：无参时默认今天。传参才能取「任意一周」的起止（`workoutStreakWeeks` / `volumeByWeek` 依赖此项）。曾经该函数忽略参数恒返回本周，导致连续周数虚报 104。
+
+**`isRestDay(plan)`** 用**前缀匹配**判断休息日，`text.indexOf('休息') === 0`。默认计划里是「休息 / 拉伸」，用全等匹配会把它误判成训练日。
+
+**训练日连续周数 `workoutStreakWeeks()`**：本周还没练时宽容跳过（周初正常），但**只宽容本周**，往前的任一空周即终止。用 `DB.workouts` 里的**最小日期**做下界，不能用 `workouts[0]`（它只是当前顺序的首条）。
 
 ## 习惯评分算法
 
@@ -133,12 +157,16 @@ const js=src.slice(src.indexOf('<script>')+8, src.lastIndexOf('</scr'+'ipt>'));
 - 存储：损坏识别与恢复、导入导出往返、满 20 条备份提醒
 - 字号：全站无 `<12px`、层级严格递减、移动端块位置正确
 - 空数据下所有函数不抛错
+- **训练模块**：容量公式、`burnOf` 三级回退、缺口含运动项、`weekRange(ref)` 传参、`isRestDay` 前缀匹配、`workoutStreakWeeks` 不越界与断档终止
+
+> 写测试时注意：断言里要**同时打出具测量值**（如 `'计划 N 天 (' + v + ')'`），否则失败时看不出是代码错还是期望值错——本次有两个失败项就是期望值写错而非代码错。
 
 ## 已知遗留
 
-1. `生活工作台-完整版.html` 是**早期 UI**，后几轮的改进（信息密度、习惯评分、字号层级）**没有回移**。如果要，需要把它当独立文件同步
+1. `生活工作台-完整版.html` 是**早期 UI**，后几轮的改进（信息密度、习惯评分、字号层级、训练记录）**没有回移**。如果要，需要把它当独立文件同步
 2. 无截图。README 里可以补
 3. 手机上用 `file://` 打开时 localStorage 可能不持久，建议「添加到桌面」或后续做成 WebView 套壳 APK
+4. `workouts.note` 字段已在数据结构与 normalize 里预留，但表单尚未开放输入
 
 ## 下一步可以做什么
 
@@ -146,3 +174,4 @@ const js=src.slice(src.indexOf('<script>')+8, src.lastIndexOf('</scr'+'ipt>'));
 - 补 README 截图
 - 打包成 Android APK（参考 [self-life](https://github.com/Donk567-god/self-life) 的 WebView 套壳做法）
 - 从豆瓣/IMDb 导入书影音数据（参考 [Yamtrack](https://github.com/FuzzyGrim/Yamtrack)）
+- 训练模块可继续扩展：训练模板（一键套用某天动作组合）、休息计时器、组间记录

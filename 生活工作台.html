@@ -306,6 +306,50 @@ svg.auto-svg{width:100%;height:auto;display:block}
 .day .acts button:hover{background:var(--paper-3);color:var(--ink)}
 .day .acts button.ok{color:var(--green);font-weight:600}
 
+/* ---- 训练记录 ---- */
+.wk-day{border-top:1px solid var(--line-2);padding:12px 0 4px}
+.wk-day:first-child{border-top:0;padding-top:2px}
+.wk-day-hd{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:9px}
+.wk-day-hd .dt{font-family:var(--serif);font-size:15px;letter-spacing:.01em}
+.wk-day-hd .dw{font-size:13.5px;color:var(--faint)}
+.wk-day-hd .mt{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
+.set-row{display:flex;align-items:center;gap:11px;padding:7px 2px;border-bottom:1px dashed var(--line-2)}
+.set-row:last-child{border-bottom:0}
+.set-row .sp{font-size:13px;color:var(--ink-2);background:var(--paper-3);border-radius:6px;padding:2px 7px;flex:0 0 auto;letter-spacing:.03em}
+.set-row .nm{font-size:15px;font-weight:500;min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.set-row .sc{font-family:var(--serif);font-size:14.5px;color:var(--ink-2);white-space:nowrap}
+.set-row .vl{font-family:var(--serif);font-size:14.5px;color:var(--accent);white-space:nowrap;min-width:66px;text-align:right}
+.set-row .am{margin-left:2px}
+.spot-chips{display:flex;flex-wrap:wrap;gap:7px}
+.spot-chips button{font-size:13px;padding:5px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-3);transition:.15s;letter-spacing:.03em}
+.spot-chips button:hover{border-color:var(--faint)}
+.spot-chips button.on{background:var(--ink);border-color:var(--ink);color:#F7F5F1;font-weight:500}
+.spot-chips button em{font-style:normal;color:var(--faint);margin-left:5px;font-size:12.5px}
+.spot-chips button.on em{color:rgba(255,255,255,.6)}
+.ex-lib{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.ex-lib button{font-size:13px;padding:4px 11px;border-radius:8px;background:var(--paper-3);color:var(--ink-3);transition:.14s}
+.ex-lib button:hover{background:var(--accent-soft);color:var(--accent)}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:11px}
+.ex-card{border:1px solid var(--line);border-radius:var(--r-s);padding:12px 13px;background:var(--card)}
+.ex-card .hd{display:flex;align-items:baseline;gap:8px;margin-bottom:3px}
+.ex-card .hd b{font-size:15px;font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ex-card .hd span{margin-left:auto;font-size:13px;color:var(--faint);flex:0 0 auto}
+.ex-card .nw{font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.25}
+.ex-card .nw em{font-style:normal;font-size:13px;color:var(--muted);font-family:var(--sans);margin-left:2px}
+.ex-card .ft{display:flex;align-items:baseline;gap:8px;font-size:13.5px;color:var(--muted);margin-top:1px}
+.plan-badge{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;color:var(--ink-3);background:var(--paper-3);border-radius:8px;padding:5px 11px}
+.plan-badge b{font-family:var(--serif);font-size:14.5px;color:var(--ink)}
+.plan-badge.on{background:var(--green-soft);color:var(--green)}
+.plan-badge.on b{color:var(--green)}
+.wk-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.wk-cell{border:1px solid var(--line);border-radius:var(--r-s);padding:9px 8px;background:var(--card);text-align:center}
+.wk-cell.rest{background:var(--paper-2);border-style:dashed}
+.wk-cell.now{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.wk-cell .dw{font-size:13px;color:var(--faint);letter-spacing:.1em;margin-bottom:5px}
+.wk-cell .mk{font-family:var(--serif);font-size:19px;line-height:1.2;color:var(--ink)}
+.wk-cell .mk.ph{color:var(--faint);font-size:15px;font-family:var(--sans)}
+.wk-cell .tx{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.45;word-break:break-word}
+
 /* ============ 待买 / 收藏 ============ */
 .shop{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--line-2)}
 .shop:last-child{border-bottom:0}
@@ -465,6 +509,17 @@ svg.auto-svg{width:100%;height:auto;display:block}
   .sub{font-size:14.5px}
   .hero-r p{font-size:15px}
   .day .ct{font-size:15px}
+  .set-row .nm{font-size:15px}
+  .set-row .sc{font-size:15px}
+  .set-row .vl{font-size:15px}
+  .wk-day-hd .dt{font-size:15.5px}
+  .wk-day-hd .dw{font-size:14px}
+  .wk-day-hd .mt{font-size:14.5px}
+  .ex-card .hd b{font-size:15px}
+  .ex-card .ft{font-size:14px}
+  .wk-cell .tx{font-size:13.5px}
+  .wk-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .ex-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
   .habit-hd .nm{font-size:15.5px}
   .habit-hd .nm small{font-size:14.5px}
   .shop .nm{font-size:15px}
@@ -548,6 +603,20 @@ const thisMonth = () => monthOf(today());
 const WD = ['日', '一', '二', '三', '四', '五', '六'];
 const WEEK_ORDER = [1, 2, 3, 4, 5, 6, 0]; // 周一开头
 
+/* ---------- 训练部位与动作库 ---------- */
+const SPOT = ['胸', '背', '腿', '肩', '手臂', '核心', '有氧', '全身', '其他'];
+const EX_LIB = {
+  '胸':   ['卧推', '上斜卧推', '哑铃飞鸟', '双杠臂屈伸', '俯卧撑', '器械夹胸'],
+  '背':   ['引体向上', '高位下拉', '杠铃划船', '坐姿划船', '硬拉', '直臂下压'],
+  '腿':   ['深蹲', '腿举', '保加利亚分腿蹲', '腿弯举', '腿屈伸', '提踵'],
+  '肩':   ['站姿推举', '哑铃侧平举', '后束飞鸟', '面拉', '耸肩'],
+  '手臂': ['杠铃弯举', '哑铃弯举', '锤式弯举', '窄距卧推', '绳索下压'],
+  '核心': ['卷腹', '悬垂举腿', '平板支撑', '俄罗斯转体', '健腹轮'],
+  '有氧': ['跑步', '快走', '椭圆机', '动感单车', '跳绳', '游泳', '爬楼机'],
+  '全身': ['波比跳', '壶铃摇摆', '农夫行走', '战绳', 'HIIT'],
+  '其他': ['拉伸', '瑜伽', '康复训练']
+};
+
 const ICON = {
   home: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9.5 20v-6h5v6"/>',
   wallet: '<rect x="2.5" y="6" width="19" height="13" rx="2.5"/><path d="M2.5 10h19"/><circle cx="17" cy="14.5" r="1.2"/>',
@@ -574,8 +643,7 @@ const ICON = {
   list: '<path d="M8 6.5h12M8 12h12M8 17.5h12M4 6.5v.1M4 12v.1M4 17.5v.1"/>',
   spark: '<path d="M12 3.5l1.7 5.1 5.1 1.7-5.1 1.7L12 17.1l-1.7-5.1L5.2 10.3l5.1-1.7z"/>',
   chev: '<path d="M9.5 6l6 6-6 6"/>'
-};
-const ic = (n, cls) => '<svg class="' + (cls || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">' + (ICON[n] || '') + '</svg>';
+};const ic = (n, cls) => '<svg class="' + (cls || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">' + (ICON[n] || '') + '</svg>';
 
 const PALETTE = ['#A8452A', '#4E6B57', '#3E5C76', '#A07C2C', '#6E4A5C', '#8A6A3B', '#5A6B7C', '#B06A46', '#4B6B63', '#7A5A46'];
 /* ==========================================================
@@ -594,7 +662,7 @@ const BLANK = () => ({
     ],
     sinceBackup: 0, lastBackup: null, seenDemo: false, weekStart: null
   },
-  money: [], habits: [], checkins: {}, weights: [], intake: [],
+  money: [], habits: [], checkins: {}, weights: [], intake: [], workouts: [],
   schedule: [], shopping: [], media: []
 });
 
@@ -610,7 +678,7 @@ function normalize(raw) {
   out.v = raw.v || 1;
   if (raw.meta && typeof raw.meta === 'object') Object.assign(out.meta, raw.meta);
   if (!Array.isArray(out.meta.weekplan) || out.meta.weekplan.length !== 7) out.meta.weekplan = base.meta.weekplan;
-  ['money', 'habits', 'weights', 'intake', 'schedule', 'shopping', 'media'].forEach(k => {
+  ['money', 'habits', 'weights', 'intake', 'workouts', 'schedule', 'shopping', 'media'].forEach(k => {
     if (Array.isArray(raw[k])) out[k] = raw[k].filter(x => x && typeof x === 'object');
     else out[k] = [];
   });
@@ -631,6 +699,17 @@ function normalize(raw) {
     fat: x.fat == null || x.fat === '' ? null : Number(x.fat), demo: !!x.demo
   })).sort((a, b) => a.date < b.date ? -1 : 1);
   out.intake = out.intake.filter(x => x.date).map(x => ({ id: x.id || uid(), date: x.date, kcal: Number(x.kcal) || 0, demo: !!x.demo }));
+  out.workouts = out.workouts.filter(x => x && x.date).map(x => ({
+    id: x.id || uid(), date: x.date,
+    spot: SPOT.indexOf(x.spot) >= 0 ? x.spot : '其他',
+    name: String(x.name || '').slice(0, 20) || '训练',
+    sets: Math.max(0, Math.round(Number(x.sets) || 0)),
+    reps: Math.max(0, Math.round(Number(x.reps) || 0)),
+    weight: Math.max(0, Number(x.weight) || 0),
+    dur: Math.max(0, Math.round(Number(x.dur) || 0)),
+    kcal: Math.max(0, Math.round(Number(x.kcal) || 0)),
+    note: String(x.note || '').slice(0, 60), demo: !!x.demo
+  })).sort((a, b) => a.date < b.date ? -1 : 1);
   out.schedule = out.schedule.filter(x => x && x.title).map(x => ({
     id: x.id || uid(), date: x.date || today(), time: x.time || '', title: String(x.title).slice(0, 60),
     cat: x.cat || '生活', pri: ['高', '中', '低'].indexOf(x.pri) >= 0 ? x.pri : '中', done: !!x.done, demo: !!x.demo
@@ -939,8 +1018,9 @@ function allHabitStats(n) {
   list.forEach(d => { DB.habits.forEach(h => { if (habitDone(h, d)) hit++; }); });
   return { rate: slots ? hit / slots : null, hit: hit, slots: slots, perfect: list.filter(d => DB.habits.length && DB.habits.every(h => habitDone(h, d))).length };
 }
-function weekRange() {
-  const t = today(), dow = (parseD(t).getDay() + 6) % 7;
+/** 返回 ref（默认今天）所在自然周的起止日期，周一为一周之始 */
+function weekRange(ref) {
+  const t = ref || today(), dow = (parseD(t).getDay() + 6) % 7;
   return { from: addDays(t, -dow), to: addDays(t, 6 - dow), dow: dow };
 }
 function weightChange(n) {
@@ -952,6 +1032,7 @@ function weightChange(n) {
   if (first.date === last.date) return null;
   return {
     delta: last.weight - first.weight, from: first.weight, to: last.weight,
+    fromDate: first.date, toDate: last.date,
     span: daysBetween(first.date, last.date),
     fatDelta: (first.fat != null && last.fat != null) ? last.fat - first.fat : null
   };
@@ -967,11 +1048,121 @@ function goalEta() {
   const days = Math.ceil(remain / -perDay);
   return { remain: remain, days: days, eta: addDays(today(), days), perWeek: -perDay * 7 };
 }
+/* ---------- 训练 ---------- */
+function volOf(x) { return (Number(x.sets) || 0) * (Number(x.reps) || 0) * (Number(x.weight) || 0); }
+function workoutsOf(d) { return DB.workouts.filter(x => x.date === d); }
+/* 某日训练消耗：优先用记录里的 kcal，没有则按时长 ×  MET 估值 */
+function burnOf(d) {
+  const ws = workoutsOf(d);
+  if (!ws.length) return 0;
+  let explicit = 0, est = 0;
+  ws.forEach(x => {
+    if (x.kcal) explicit += x.kcal;
+    else if (x.dur) est += Math.round(x.dur * (x.spot === '有氧' ? 9.2 : 6.4));
+  });
+  return explicit + est;
+}
+function burnOfRange(n) {
+  let sum = 0;
+  daysBack(n).forEach(d => sum += burnOf(d));
+  return sum;
+}
+function workoutStats(n) {
+  const t = today();
+  const list = n == null ? DB.workouts : DB.workouts.filter(x => x.date >= addDays(t, -(n - 1)) && x.date <= t);
+  const days = {};
+  let kcal = 0, dur = 0, volume = 0, sets = 0, hard = 0;
+  list.forEach(x => {
+    days[x.date] = 1;
+    kcal += Number(x.kcal) || 0; dur += Number(x.dur) || 0;
+    volume += volOf(x); sets += Number(x.sets) || 0;
+    hard++;
+  });
+  return { n: list.length, days: Object.keys(days).length, kcal: kcal, dur: dur, volume: volume, sets: sets, items: hard };
+}
+/* 训练日连续周数：从本周往前，连续每周至少练 1 次。
+   本周尚未开练时不判为断档（周初本来就可能没练），只宽容这一周。 */
+function workoutStreakWeeks() {
+  const t = today();
+  if (!DB.workouts.length) return 0;
+  let earliest = DB.workouts[0].date;
+  DB.workouts.forEach(x => { if (x.date < earliest) earliest = x.date; });
+  const hasWeek = (w) => {
+    const r = weekRange(addDays(t, -w * 7));
+    return DB.workouts.some(x => x.date >= r.from && x.date <= r.to);
+  };
+  let n = 0;
+  for (let w = 0; w < 104; w++) {
+    const r = weekRange(addDays(t, -w * 7));
+    if (r.to < earliest) break;              /* 已越过首次训练，结束 */
+    if (hasWeek(w)) { n++; }
+    else if (w === 0) continue;              /* 本周还没练：宽容跳过，不计入 */
+    else break;
+  }
+  return n;
+}
+/* 主要部位分布 */
+function spotBreak() {
+  const map = {};
+  DB.workouts.forEach(x => { map[x.spot] = (map[x.spot] || 0) + 1; });
+  return Object.keys(map).map(k => ({ spot: k, n: map[k] })).sort((a, b) => b.n - a.n);
+}
+/* 动作进步：取记录最多的若个动作，算出最大重量与最佳单次容量 */
+function exProgress(limit) {
+  const map = {};
+  DB.workouts.forEach(x => {
+    if (!x.name || !(Number(x.weight) > 0)) return;
+    const k = x.name;
+    if (!map[k]) map[k] = { name: k, spot: x.spot, pts: [], n: 0 };
+    map[k].n++;
+    const exist = map[k].pts.filter(p => p.date === x.date)[0];
+    if (exist) { if (x.weight > exist.v) exist.v = x.weight; }
+    else map[k].pts.push({ date: x.date, v: Number(x.weight) });
+  });
+  const arr = Object.keys(map).map(k => map[k]).filter(e => e.pts.length >= 2);
+  arr.sort((a, b) => b.n - a.n);
+  const out = (limit ? arr.slice(0, limit) : arr);
+  out.forEach(e => {
+    e.pts.sort((a, b) => a.date < b.date ? -1 : 1);
+    e.first = e.pts[0].v; e.last = e.pts[e.pts.length - 1].v;
+    e.delta = e.last - e.first;
+    e.best = Math.max.apply(null, e.pts.map(p => p.v));
+  });
+  return out;
+}
+/* 每周训练容量（近 n 周，含本周） */
+function volumeByWeek(n) {
+  const t = today();
+  const out = [];
+  for (let i = n - 1; i >= 0; i--) {
+    const r = weekRange(addDays(t, -i * 7));
+    const list = DB.workouts.filter(x => x.date >= r.from && x.date <= r.to);
+    const days = {}; let v = 0, k = 0, d = 0;
+    list.forEach(x => { days[x.date] = 1; v += volOf(x); k += Number(x.kcal) || 0; d += Number(x.dur) || 0; });
+    out.push({ from: r.from, to: r.to, days: Object.keys(days).length, volume: v, kcal: k, dur: d, label: md(r.from) });
+  }
+  return out;
+}
+/* 判断某天的计划是否为「休息日」：以「休息」开头即算，避免「休息 / 拉伸」被漏判 */
+function isRestDay(plan) {
+  const tx = String((plan && plan.text) || '').trim();
+  return tx.indexOf('休息') === 0;
+}
+/* 本周计划 vs 实际 */
+function planThisWeek() {
+  const r = weekRange(today());
+  const plan = DB.meta.weekplan || [];
+  const done = plan.filter(p => p && p.done).length;
+  const planned = plan.filter(p => p && String(p.text || '').trim() && !isRestDay(p)).length;
+  const actual = workoutStats(7).days;
+  return { planned: planned, doneDone: done, actual: actual, from: r.from, to: r.to };
+}
 function intakeStats() {
   const tdee = Number(DB.meta.tdee) || 0;
   const vals = daysBack(7).map(d => DB.intake.filter(x => x.date === d).reduce((a, b) => a + b.kcal, 0)).filter(v => v > 0);
   const avg = vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length) : 0;
-  return { avg: avg, days: vals.length, tdee: tdee, sumDef: tdee ? vals.reduce((a, b) => a + (tdee - b), 0) : 0 };
+  const burn = burnOfRange(7);
+  return { avg: avg, days: vals.length, tdee: tdee, burn: burn, sumDef: tdee ? vals.reduce((a, b) => a + (tdee - b), 0) + burn : 0 };
 }
 function yearProgress() {
   const now = new Date(), y = now.getFullYear();
@@ -1041,6 +1232,37 @@ function statStrip(items) {
 function signN(v, digits) {
   const d = digits == null ? 1 : digits;
   return (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(d);
+}
+/* ---------- 训练容量柱状图 ---------- */
+function volBarsSVG(weeks, opt) {
+  opt = opt || {};
+  const W = 680, H = opt.h || 170, pl = 34, pr = 12, pt = 14, pb = 26;
+  if (!weeks || !weeks.length) return '<div class="empty">还没有训练记录</div>';
+  const max = Math.max.apply(null, weeks.map(w => w.volume)) || 1;
+  const n = weeks.length;
+  const bw = (W - pl - pr) / n;
+  const gap = Math.min(10, bw * .28);
+  const X = i => pl + bw * i + (bw - Math.max(0, bw - gap)) * 0;
+  let bars = '', labs = '', tips = '';
+  weeks.forEach((w, i) => {
+    const barW = Math.max(4, bw - gap);
+    const x = pl + bw * i + gap / 2;
+    const hgt = Math.max(0, (H - pt - pb) * (w.volume / max));
+    const y = H - pb - hgt;
+    const isNow = i === n - 1;
+    const col = w.volume === 0 ? '#F1EDE6' : (isNow ? '#A8452A' : '#4E6B57');
+    bars += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + hgt.toFixed(1) +
+      '" rx="4" fill="' + col + '"' + (w.volume ? ' opacity="' + (isNow ? 1 : .78) + '"' : '') + '>' +
+      '<title>' + w.label + '–' + md(w.to) + '：' + (w.volume ? nf(Math.round(w.volume)) + ' kg 容量，' : '') + w.days + ' 练</title></rect>';
+    if (w.volume > 0) {
+      tips += '<text x="' + (x + barW / 2).toFixed(1) + '" y="' + (y - 5).toFixed(1) + '" text-anchor="middle" font-size="11" fill="#8B8478">' +
+        (w.volume >= 1000 ? (w.volume / 1000).toFixed(1) + 't' : Math.round(w.volume)) + '</text>';
+    }
+    labs += '<text x="' + (x + barW / 2).toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="11" fill="#B8B1A5">' + esc(w.label) + '</text>';
+  });
+  return '<div class="chart-box"><svg viewBox="0 0 ' + W + ' ' + H + '" class="auto-svg">' +
+    '<line x1="' + pl + '" y1="' + (H - pb) + '" x2="' + (W - pr) + '" y2="' + (H - pb) + '" stroke="#E7E1D7" stroke-width="1"/>' +
+    bars + tips + labs + '</svg></div>';
 }
 /* ---------- 首页信息块 ---------- */
 function overallHeatHTML(days) {
@@ -1256,6 +1478,32 @@ function seedDemo() {
 
   for (let i = 0; i < 7; i++) push(DB.intake, { date: addDays(t, -i), kcal: 1750 + Math.floor(Math.random() * 480) });
 
+  /* 训练记录：近 4 周，每周 3 练，动作重量缓慢递增 */
+  const demoPlan = [
+    { spot: '胸', con: [['卧推', 4, 8, 45], ['上斜卧推', 3, 10, 30], ['器械夹胸', 3, 12, 25]], dur: 55, kcal: 320 },
+    { spot: '背', con: [['高位下拉', 4, 10, 50], ['坐姿划船', 3, 12, 45], ['硬拉', 3, 6, 70]], dur: 60, kcal: 360 },
+    { spot: '腿', con: [['深蹲', 4, 8, 60], ['腿举', 3, 12, 90], ['腿弯举', 3, 12, 35]], dur: 65, kcal: 420 }
+  ];
+  for (let wk = 3; wk >= 0; wk--) {
+    demoPlan.forEach((d, di) => {
+      const back = wk * 7 + di * 2;
+      const date = addDays(t, -back);
+      d.con.forEach(c => push(DB.workouts, {
+        date: date, spot: d.spot, name: c[0], sets: c[1], reps: c[2],
+        weight: Math.round((c[3] * (1 + (3 - wk) * 0.026)) * 2) / 2,
+        dur: 0, kcal: 0
+      }));
+      /* 同一天的时长与消耗记在首条上 */
+      const first = DB.workouts.filter(x => x.date === date)[0];
+      if (first) { first.dur = d.dur; first.kcal = d.kcal; }
+    });
+  }
+  /* 两条有氧单独成日 */
+  [ { back: 5, name: '跑步', spot: '有氧', dur: 35, kcal: 330 },
+    { back: 12, name: '跳绳', spot: '有氧', dur: 25, kcal: 260 } ].forEach(o => {
+    push(DB.workouts, { date: addDays(t, -o.back), spot: o.spot, name: o.name, sets: 0, reps: 0, weight: 0, dur: o.dur, kcal: o.kcal });
+  });
+
   push(DB.shopping, { name: '氨基酸洗面奶', price: 89, cat: '日用', pri: '中' });
   push(DB.shopping, { name: '跑鞋（缓震款）', price: 560, cat: '运动', pri: '高' });
   push(DB.shopping, { name: '厨房收纳盒 ×4', price: 68, cat: '家居', pri: '低' });
@@ -1272,10 +1520,11 @@ function seedDemo() {
 }
 function hasDemo() {
   return DB.money.some(x => x.demo) || DB.habits.some(x => x.demo) || DB.weights.some(x => x.demo) ||
-    DB.schedule.some(x => x.demo) || DB.shopping.some(x => x.demo) || DB.media.some(x => x.demo) || DB.intake.some(x => x.demo);
+    DB.schedule.some(x => x.demo) || DB.shopping.some(x => x.demo) || DB.media.some(x => x.demo) ||
+    DB.intake.some(x => x.demo) || DB.workouts.some(x => x.demo);
 }
 function clearDemo() {
-  ['money', 'habits', 'weights', 'schedule', 'shopping', 'media', 'intake'].forEach(k => { DB[k] = DB[k].filter(x => !x.demo); });
+  ['money', 'habits', 'weights', 'schedule', 'shopping', 'media', 'intake', 'workouts'].forEach(k => { DB[k] = DB[k].filter(x => !x.demo); });
   const ids = {}; DB.habits.forEach(h => ids[h.id] = 1);
   Object.keys(DB.checkins).forEach(k => { if (!ids[k]) delete DB.checkins[k]; });
   save(true); toast('演示数据已清空');
@@ -1316,7 +1565,7 @@ function importJSON(file) {
     const incoming = parsed && parsed.data ? parsed.data : parsed;
     if (!incoming || typeof incoming !== 'object') { toast('文件内容无法识别'); return; }
     const clean = normalize(incoming);
-    const count = ['money', 'habits', 'weights', 'schedule', 'shopping', 'media', 'intake'].reduce((a, k) => a + clean[k].length, 0);
+    const count = ['money', 'habits', 'weights', 'schedule', 'shopping', 'media', 'intake', 'workouts'].reduce((a, k) => a + clean[k].length, 0);
     if (!count && !Object.keys(clean.checkins).length) { toast('备份中没有可导入的记录'); return; }
     openForm({
       title: '导入备份', submitText: '导入',
@@ -1329,9 +1578,10 @@ function importJSON(file) {
         if (v.mode === 'replace') {
           DB = clean; save(true); toast('已覆盖导入 ' + count + ' 条记录');
         } else {
-          ['money', 'habits', 'weights', 'schedule', 'shopping', 'media', 'intake'].forEach(k => {
+          ['money', 'habits', 'weights', 'schedule', 'shopping', 'media', 'intake', 'workouts'].forEach(k => {
             clean[k].forEach(item => { if (!item.id) item.id = uid(); DB[k].push(item); });
           });
+          ['workouts', 'weights'].forEach(k => DB[k].sort((a, b) => a.date < b.date ? -1 : 1));
           Object.keys(clean.checkins).forEach(hid => {
             if (!DB.checkins[hid]) DB.checkins[hid] = {};
             Object.assign(DB.checkins[hid], clean.checkins[hid]);
@@ -1757,25 +2007,43 @@ VIEWS.body = function () {
   const fatSeries = ma.filter(p => { const w = DB.weights.find(x => x.date === p.date); return w && w.fat != null; });
   const fatChart = fatSeries.length >= 2 ? lineChartSVG([{ name: '体脂', color: '#6E4A5C', points: fatSeries.map(p => { const w = DB.weights.find(x => x.date === p.date); return { date: p.date, label: p.date, v: w.fat }; }), w: 2, area: true }], { h: 150 }) : '<div class="empty">记录两次以上体脂后可看趋势</div>';
 
+  /* ---------- 热量：缺口 = 消耗(TDEE) + 运动 − 摄入 ---------- */
   const tdee = Number(DB.meta.tdee) || 0;
   const todayIntake = DB.intake.filter(x => x.date === t).reduce((a, b) => a + b.kcal, 0);
-  const deficit = tdee ? tdee - todayIntake : null;
+  const todayBurn = burnOf(t);
+  const deficit = tdee ? (tdee + todayBurn - todayIntake) : null;
   const intake7 = [];
   for (let i = 6; i >= 0; i--) {
     const d = addDays(t, -i);
     const k = DB.intake.filter(x => x.date === d).reduce((a, b) => a + b.kcal, 0);
-    intake7.push({ d: d, k: k });
+    intake7.push({ d: d, k: k, b: burnOf(d) });
   }
   const maxK = Math.max(tdee, Math.max.apply(null, intake7.map(x => x.k))) || 1;
   const avg7 = intake7.filter(x => x.k > 0).length ? Math.round(intake7.reduce((a, b) => a + b.k, 0) / intake7.filter(x => x.k > 0).length) : 0;
   const is7 = intakeStats();
 
+  /* ---------- 训练 ---------- */
+  const ws7 = workoutStats(7), ws30 = workoutStats(30), wsAll = workoutStats(null);
+  const vw = volumeByWeek(8);
+  const planStat = planThisWeek();
+  const todayWs = workoutsOf(t);
+  const todayVol = todayWs.reduce((a, b) => a + volOf(b), 0);
+  const streakWk = workoutStreakWeeks();
+  const spots = spotBreak();
+  const exs = exProgress(6);
   const todayDow = (new Date().getDay() + 6) % 7;
+
+  /* 训练记录按日倒序分组（近 30 天） */
+  const byDay = {};
+  DB.workouts.filter(x => x.date >= addDays(t, -30) && x.date <= t).forEach(x => { (byDay[x.date] = byDay[x.date] || []).push(x); });
+  const dayKeys = Object.keys(byDay).sort().reverse();
+  const allKeys = Object.keys(byDay);
+  const feedKeys = (allKeys.length > dayKeys.length ? dayKeys : allKeys).slice(0, 12);
 
   return '' +
     '<div class="eyebrow">Body · 减脂健身</div>' +
     '<h1 class="page-t">数字不会说谎，<em>趋势</em>才算数</h1>' +
-    '<p class="sub">体重、体脂、BMI、热量缺口与每周训练安排，都在这里。</p>' +
+    '<p class="sub">体重、体脂、BMI、热量缺口、训练记录与每周安排，都在这里。</p>' +
 
     '<div class="sec"><div class="sec-hd"><h2>身体数据</h2><span class="spacer"></span>' +
       '<button class="btn accent mini" data-act="addWeight">' + ic('plus') + '记录体重</button></div>' +
@@ -1800,7 +2068,7 @@ VIEWS.body = function () {
       '<div style="margin-top:14px">' + statStrip([
         {
           l: '近 7 天变化', v: w7 ? signN(w7.delta) : '—', u: w7 ? ' kg' : '',
-          sub: w7 ? md(w7.from) + ' → ' + md(w7.to) + '（' + w7.span + ' 天）' : '数据不足'
+          sub: w7 ? md(w7.fromDate) + ' → ' + md(w7.toDate) + '（' + w7.span + ' 天）' : '数据不足'
         },
         {
           l: '近 30 天变化', v: w30 ? signN(w30.delta) : '—', u: w30 ? ' kg' : '',
@@ -1817,44 +2085,146 @@ VIEWS.body = function () {
       ]) + '</div>' +
     '</div>' +
 
-    '<div class="sec"><div class="sec-hd"><h2>体重趋势</h2><span class="note">' + ma.length + ' 次记录</span>' +
-      '<span class="spacer"></span><span class="note" style="display:flex;gap:14px">' +
-      '<span style="display:flex;align-items:center;gap:5px"><i style="width:14px;height:2px;background:#A8452A;display:block"></i>体重</span>' +
-      '<span style="display:flex;align-items:center;gap:5px"><i style="width:14px;height:2px;background:#3E5C76;display:block"></i>7 日均线</span></span></div>' +
-      '<div class="panel">' + (ma.length ? lineChartSVG(series) : '<div class="empty">还没有体重记录，先称一次吧</div>') + '</div>' +
+    '<div class="sec"><div class="sec-hd"><h2>训练概览</h2><span class="note">共 ' + wsAll.days + ' 个训练日</span><span class="spacer"></span>' +
+      '<button class="btn accent mini" data-act="addWorkout">' + ic('plus') + '记一次训练</button></div>' +
+      (wsAll.n ? statStrip([
+        {
+          l: '本周训练', v: ws7.days, u: ' 天',
+          sub: planStat.planned ? '本周计划 ' + planStat.planned + ' 练' : '还没有安排'
+        },
+        {
+          l: '近 30 天训练', v: ws30.days, u: ' 次',
+          sub: ws30.dur ? '共 ' + Math.round(ws30.dur) + ' 分钟' : '未记录时长'
+        },
+        {
+          l: '连续训练周', v: streakWk, u: ' 周',
+          sub: streakWk >= 4 ? '稳定期，保持住' : streakWk ? '继续保持' : '本周还没开练'
+        },
+        {
+          l: '近 30 天容量', v: ws30.volume >= 1000 ? (ws30.volume / 1000).toFixed(1) : Math.round(ws30.volume),
+          u: ws30.volume >= 1000 ? ' 吨' : ' kg',
+          sub: ws30.sets ? '共 ' + ws30.sets + ' 组' : '有氧 / 无负重为主'
+        }
+      ]) +
+      '<div style="margin-top:14px">' + statStrip([
+        {
+          l: '近 30 天训练消耗', v: ws30.kcal ? nf(ws30.kcal) : '—', u: ws30.kcal ? ' kcal' : '',
+          sub: ws30.days ? '平均每次 ' + nf(Math.round(ws30.kcal / ws30.days)) + ' kcal' : '未记录消耗'
+        },
+        {
+          l: '近 30 天时长', v: ws30.dur ? Math.round(ws30.dur) : '—', u: ws30.dur ? ' 分钟' : '',
+          sub: ws30.days ? '平均 ' + Math.round(ws30.dur / ws30.days) + ' 分钟 / 次' : '未记录时长'
+        },
+        {
+          l: '训练频率', v: ws30.days ? (ws30.days / 30 * 7).toFixed(1) : '—', u: ws30.days ? ' 次/周' : '',
+          sub: ws30.days >= 12 ? '频率充足' : ws30.days ? '建议每周 3 次以上' : '暂无数据'
+        },
+        {
+          l: '今日训练', v: todayWs.length ? todayWs.length : 0, u: todayWs.length ? ' 项' : '',
+          sub: todayWs.length ? (todayBurn ? '消耗约 ' + nf(todayBurn) + ' kcal' : '今日已练') : '今天还没练'
+        }
+      ]) + '</div>' : '<div class="empty">还没有训练记录，点右上角「记一次训练」开始</div>') +
+      (spots.length ? '<div style="margin-top:14px"><div style="font-size:13.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:9px">部位分布</div>' +
+        '<div class="spot-chips">' + spots.map(s => '<button style="cursor:default">' + esc(s.spot) + '<em>' + s.n + '</em></button>').join('') + '</div></div>' : '') +
     '</div>' +
 
-    '<div class="sec"><div class="sec-hd"><h2>热量缺口</h2><span class="note">每日消耗 ' + nf(tdee) + ' kcal</span></div>' +
+    '<div class="sec"><div class="sec-hd"><h2>训练容量趋势</h2><span class="note">近 8 周 · 组数 × 次数 × 重量</span></div>' +
+      '<div class="panel">' + (wsAll.volume ? volBarsSVG(vw) + '<div style="font-size:14px;color:var(--muted);margin-top:10px">' +
+        '柱高为每周总容量（吨位），数字为当周总量。容量稳步上升说明训练在加量；突然腰斩通常是缺训。' +
+        '</div>' : (wsAll.n ? '<div class="empty">记录里还没有负重数据，容量需要填写重量</div>' : '<div class="empty">还没有训练记录</div>')) + '</div>' +
+    '</div>' +
+
+    (exs.length ? '<div class="sec"><div class="sec-hd"><h2>动作进步</h2><span class="note">记录最多的动作 · 最大重量</span></div>' +
+      '<div class="ex-grid">' + exs.map(e =>
+        '<div class="ex-card">' +
+          '<div class="hd"><b>' + esc(e.name) + '</b><span>' + esc(e.spot) + '</span></div>' +
+          '<div class="nw">' + e.last + '<em>kg</em></div>' +
+          '<div class="ft">' +
+            '<span>' + e.pts.length + ' 次记录</span>' +
+            (Math.abs(e.delta) > 0.001 ? '<span class="' + (e.delta > 0 ? 'pos' : 'neg') + '">' + signN(e.delta, 1) + ' kg</span>' : '<span>持平</span>') +
+            '<span class="spacer" style="flex:1"></span>' +
+            '<span>最佳 ' + e.best + '</span>' +
+          '</div>' +
+        '</div>').join('') + '</div>' +
+    '</div>' : '') +
+
+    (feedKeys.length ? '<div class="sec"><div class="sec-hd"><h2>近 30 天训练记录</h2><span class="note">共 ' + ws30.n + ' 条</span></div>' +
+      '<div class="panel">' + feedKeys.map((d, di) => {
+        const list = byDay[d];
+        const vol = list.reduce((a, b) => a + volOf(b), 0);
+        const kcal = list.reduce((a, b) => a + (Number(b.kcal) || 0), 0);
+        const dur = list.reduce((a, b) => a + (Number(b.dur) || 0), 0);
+        const dd = parseD(d);
+        const isT = d === t;
+        const newPR = {};
+        list.forEach(x => {
+          if (!(Number(x.weight) > 0)) return;
+          const prev = DB.workouts.filter(y => y.name === x.name && y.date < d).map(y => Number(y.weight) || 0);
+          if (prev.length && x.weight > Math.max.apply(null, prev)) newPR[x.id] = 1;
+        });
+        return '<div class="wk-day">' +
+          '<div class="wk-day-hd">' +
+            '<span class="dt">' + md(d) + '</span>' +
+            '<span class="dw">周' + WD[dd.getDay()] + (isT ? ' · 今天' : '') + '</span>' +
+            '<span class="mt">' +
+              (dur ? '<span>' + dur + ' 分钟</span>' : '') +
+              (kcal ? '<span>' + nf(kcal) + ' kcal</span>' : '') +
+              (vol ? '<span class="num">' + (vol >= 1000 ? (vol / 1000).toFixed(1) + ' t' : Math.round(vol) + ' kg') + '</span>' : '') +
+            '</span>' +
+          '</div>' +
+          list.map(x => '<div class="set-row">' +
+            '<span class="sp">' + esc(x.spot) + '</span>' +
+            '<span class="nm">' + esc(x.name) + (newPR[x.id] ? ' <span class="tag a" style="font-size:13px">PR</span>' : '') + '</span>' +
+            (x.sets && x.reps ? '<span class="sc">' + x.sets + ' × ' + x.reps + '</span>' : (x.dur ? '<span class="sc">' + x.dur + ' 分钟</span>' : '')) +
+            (Number(x.weight) > 0 ? '<span class="vl">' + x.weight + ' kg</span>' : '<span class="vl" style="color:var(--faint)">—</span>') +
+            '<button class="icon-btn" data-act="editWorkout" data-id="' + x.id + '">' + ic('edit') + '</button>' +
+            '<button class="icon-btn danger" data-act="delWorkout" data-id="' + x.id + '">' + ic('trash') + '</button>' +
+          '</div>').join('') +
+        '</div>';
+      }).join('') + '</div>' +
+    '</div>' : '') +
+
+    '<div class="sec"><div class="sec-hd"><h2>热量缺口</h2><span class="note">基础消耗 ' + nf(tdee) + ' kcal/天</span></div>' +
       '<div class="split">' +
         '<div class="panel">' +
-          '<div style="display:flex;gap:14px;align-items:center;margin-bottom:14px;flex-wrap:wrap">' +
-            '<div class="field" style="flex:1;min-width:140px"><label>今日摄入 (kcal)</label>' +
+          '<div style="display:flex;gap:14px;align-items:flex-end;margin-bottom:14px;flex-wrap:wrap">' +
+            '<div class="field" style="flex:1;min-width:120px"><label>今日摄入 (kcal)</label>' +
             '<input class="inp" type="number" inputmode="numeric" step="10" value="' + (todayIntake || '') + '" placeholder="例如 1800" data-act="saveIntake"></div>' +
-            '<div style="text-align:right"><div style="font-size:13px;letter-spacing:.14em;color:var(--faint)">今日缺口</div>' +
-            '<div class="num" style="font-size:28px;color:' + (deficit == null ? 'var(--muted)' : deficit >= 0 ? 'var(--green)' : 'var(--accent)') + '">' + (deficit == null ? '—' : (deficit > 0 ? '−' : '+') + nf(Math.abs(deficit))) + '</div>' +
-            '<div style="font-size:13.5px;color:var(--muted)">' + (deficit == null ? '请先设置每日消耗' : deficit > 0 ? '处于热量缺口，利于减脂' : '热量盈余，注意控制') + '</div></div>' +
+            '<div class="field" style="flex:1;min-width:120px"><label>今日运动消耗 (kcal)</label>' +
+            '<input class="inp" type="number" inputmode="numeric" step="10" value="' + (todayBurn || '') + '" placeholder="' + (todayWs.length ? '已按训练估值 ' + todayBurn : '例如 320') + '" data-act="saveBurn"></div>' +
+          '</div>' +
+          '<div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:16px">' +
+            '<div><div style="font-size:13px;letter-spacing:.14em;color:var(--faint)">今日缺口</div>' +
+            '<div class="num" style="font-size:28px;color:' + (deficit == null ? 'var(--muted)' : deficit >= 0 ? 'var(--green)' : 'var(--accent)') + '">' + (deficit == null ? '—' : (deficit > 0 ? '−' : '+') + nf(Math.abs(deficit))) + '</div></div>' +
+            '<div style="font-size:13.5px;color:var(--muted);line-height:1.7;flex:1;min-width:150px">' +
+              (deficit == null ? '请先设置每日消耗' :
+                '基础消耗 ' + nf(tdee) + (todayBurn ? ' ＋ 运动 ' + nf(todayBurn) : '') + ' − 摄入 ' + nf(todayIntake) + '<br>' +
+                (deficit > 0 ? '处于热量缺口，利于减脂' : todayBurn ? '运动抵消后仍有盈余，注意控制' : '热量盈余，注意控制')) +
+            '</div>' +
           '</div>' +
           '<div style="display:flex;gap:8px;align-items:flex-end;height:96px">' +
             intake7.map(x => {
-              const over = tdee && x.k > tdee;
+              const over = tdee && x.k > tdee + x.b;
               return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%">' +
                 '<div style="flex:1;width:100%;display:flex;align-items:flex-end;position:relative">' +
+                (x.b ? '<i title="运动 ' + x.b + ' kcal" style="position:absolute;bottom:0;left:0;right:0;height:' + Math.min(100, x.b / maxK * 100) + '%;background:var(--blue);opacity:.16;border-radius:5px;display:block"></i>' : '') +
                 '<i style="width:100%;height:' + (x.k / maxK * 100) + '%;border-radius:5px;background:' + (x.k === 0 ? '#F1EDE6' : over ? 'var(--accent)' : 'var(--green)') + ';opacity:' + (x.k === 0 ? 1 : .8) + ';display:block"></i></div>' +
                 '<span style="font-size:14px;color:var(--faint)">' + WD[parseD(x.d).getDay()] + '</span></div>';
             }).join('') + '</div>' +
-          '<div style="font-size:14px;color:var(--muted);margin-top:10px">柱高为当日摄入，虚线位置为每日消耗 ' + nf(tdee) + ' kcal；绿色为缺口、红色为盈余。</div>' +
+          '<div style="font-size:14px;color:var(--muted);margin-top:10px">柱高为当日摄入，底部淡蓝为运动消耗，虚线位置为每日基础消耗 ' + nf(tdee) + ' kcal；绿柱为缺口、红柱为盈余（判定已计入运动）。</div>' +
           '<div style="margin-top:14px">' + statStrip([
             {
               l: '近 7 天均摄入', v: is7.avg ? nf(is7.avg) : '—', u: is7.avg ? ' kcal' : '',
               sub: '已记录 ' + is7.days + ' / 7 天'
             },
             {
-              l: '平均每日缺口', v: is7.tdee && is7.days ? (is7.sumDef / is7.days > 0 ? '−' : '+') + nf(Math.abs(is7.sumDef / is7.days)) : '—',
-              u: is7.tdee && is7.days ? ' kcal' : '', sub: is7.tdee ? '相对消耗 ' + nf(is7.tdee) : '请先设置每日消耗'
+              l: '近 7 天运动消耗', v: is7.burn ? nf(is7.burn) : '—', u: is7.burn ? ' kcal' : '',
+              sub: is7.burn ? ws7.days + ' 次训练累计' : '本周还没训练'
             },
             {
               l: '近 7 日累计缺口', v: is7.tdee && is7.days ? (is7.sumDef > 0 ? '−' : '+') + nf(Math.abs(is7.sumDef)) : '—',
-              u: is7.tdee && is7.days ? ' kcal' : '', sub: is7.days ? '共 ' + is7.days + ' 天记录' : '暂无记录'
+              u: is7.tdee && is7.days ? ' kcal' : '',
+              sub: is7.tdee ? '含基础消耗 + 运动 − 摄入' : '请先设置每日消耗'
             },
             {
               l: '折算脂肪', v: is7.tdee && is7.days ? (is7.sumDef > 0 ? '−' : '+') + (Math.abs(is7.sumDef) / 7700).toFixed(2) : '—',
@@ -1867,27 +2237,78 @@ VIEWS.body = function () {
           '<div style="font-weight:600;color:var(--ink);margin-bottom:6px">怎么看这个数</div>' +
           '按 7700 kcal ≈ 1 kg 脂肪估算，每天稳定 ' + (tdee ? nf(Math.round(tdee * 0.18)) : '300') + ' kcal 左右的缺口，一周大约能掉 0.3–0.4 kg。' +
           '缺口拉到 500 以上容易掉肌肉、也难坚持，反而不如慢一点。' +
-          (avg7 && tdee && avg7 > tdee ? '近七天平均是盈余状态，先把饮食拉回消耗线以下。' : '') +
+          (todayBurn ? '今天训练消耗了 ' + nf(todayBurn) + ' kcal，可以适当多吃一点回补。' : '') +
+          (avg7 && tdee && avg7 > tdee + ws7.kcal / 7 ? '近七天平均仍是盈余状态，先把饮食拉回消耗线以下。' : '') +
           '</div></div>' +
       '</div>' +
+    '</div>' +
+
+    '<div class="sec"><div class="sec-hd"><h2>训练分布</h2></div>' +
+      '<div class="split">' +
+        '<div><div style="font-size:13.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:10px">每周训练容量</div>' +
+          '<div class="panel">' + (wsAll.volume ? volBarsSVG(vw, { h: 150 }) : '<div class="empty">暂无负重训练</div>') + '</div></div>' +
+        '<div><div style="font-size:13.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:10px">部位训练次数</div>' +
+          (spots.length ? '<div class="panel">' + (() => {
+            const mx = spots[0].n || 1;
+            return spots.map(s => '<div class="score-row" style="display:flex;align-items:center;gap:10px;padding:7px 0">' +
+              '<span style="font-size:14.5px;flex:0 0 52px;color:var(--ink-2)">' + esc(s.spot) + '</span>' +
+              '<span style="flex:1;height:7px;border-radius:99px;background:var(--paper-3);overflow:hidden">' +
+              '<i style="display:block;height:100%;border-radius:99px;background:var(--accent);opacity:.7;width:' + (s.n / mx * 100).toFixed(1) + '%"></i></span>' +
+              '<span class="num" style="font-size:14px;flex:0 0 34px;text-align:right;color:var(--muted)">' + s.n + '</span></div>').join('');
+          })() + '<div style="font-size:14px;color:var(--muted);margin-top:11px;border-top:1px solid var(--line-2);padding-top:11px">' +
+            (spots[0] && spots[0].n / Math.max(1, wsAll.n) > 0.5 ? '某个部位占比过半，注意均衡安排，别让短板拖住进步。' :
+              '各部位分布较均衡，继续保持。') + '</div></div>' : '<div class="empty">还没有训练记录</div>') +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="sec"><div class="sec-hd"><h2>体重趋势</h2><span class="note">' + ma.length + ' 次记录</span>' +
+      '<span class="spacer"></span><span class="note" style="display:flex;gap:14px">' +
+      '<span style="display:flex;align-items:center;gap:5px"><i style="width:14px;height:2px;background:#A8452A;display:block"></i>体重</span>' +
+      '<span style="display:flex;align-items:center;gap:5px"><i style="width:14px;height:2px;background:#3E5C76;display:block"></i>7 日均线</span></span></div>' +
+      '<div class="panel">' + (ma.length ? lineChartSVG(series) : '<div class="empty">还没有体重记录，先称一次吧</div>') + '</div>' +
     '</div>' +
 
     '<div class="sec"><div class="sec-hd"><h2>体脂趋势</h2></div>' +
       '<div class="panel">' + fatChart + '</div></div>' +
 
-    '<div class="sec"><div class="sec-hd"><h2>本周训练计划</h2><span class="note">点击卡片可编辑内容</span></div>' +
+    '<div class="sec"><div class="sec-hd"><h2>本周训练计划</h2><span class="note">点击卡片可编辑内容</span>' +
+      '<span class="spacer"></span><span class="plan-badge' + (planStat.actual >= planStat.planned && planStat.planned ? ' on' : '') + '">' +
+      '本周已练 <b>' + planStat.actual + '</b> 天 · 计划 <b>' + planStat.planned + '</b> 练</span></div>' +
       '<div class="week">' + WEEK_ORDER.map(dow => {
         const idx = (dow + 6) % 7;
         const plan = DB.meta.weekplan[idx] || { text: '', done: false };
         const isT = idx === todayDow;
+        const rest = isRestDay(plan);
         return '<div class="day ' + (isT ? 'today' : '') + '">' +
           '<div class="dw"><span>周' + WD[dow] + '</span>' + (isT ? '<b style="color:var(--accent)">今天</b>' : '') + '</div>' +
           '<div class="ct ' + (plan.text ? '' : 'ph') + '" data-act="editDay" data-d="' + idx + '">' + (plan.text ? esc(plan.text) : '＋ 添加安排') + '</div>' +
           '<div class="acts">' +
-            '<button class="' + (plan.done ? 'ok' : '') + '" data-act="dayDone" data-d="' + idx + '">' + (plan.done ? '✓ 已完成' : '标记完成') + '</button>' +
+            (rest ? '<button style="color:var(--faint);cursor:default">休息日</button>' :
+              '<button class="' + (plan.done ? 'ok' : '') + '" data-act="dayDone" data-d="' + idx + '">' + (plan.done ? '✓ 已完成' : '标记完成') + '</button>') +
             '<button data-act="editDay" data-d="' + idx + '">编辑</button>' +
           '</div></div>';
       }).join('') + '</div>' +
+      '<div style="margin-top:14px">' + (() => {
+        const cells = WEEK_ORDER.map(dow => {
+          const idx = (dow + 6) % 7;
+          return { dow: dow, idx: idx };
+        });
+        return '<div class="wk-grid">' + cells.map(c => {
+          const d = addDays(weekRange(t).from, (c.dow + 6) % 7);
+          const list = workoutsOf(d);
+          const isT = d === t;
+          const rest = isRestDay(DB.meta.weekplan[c.idx]);
+          const vol = list.reduce((a, b) => a + volOf(b), 0);
+          return '<div class="wk-cell' + (isT ? ' now' : '') + (list.length ? '' : rest ? ' rest' : '') + '">' +
+            '<div class="dw">周' + WD[c.dow] + '</div>' +
+            (list.length
+              ? '<div class="mk">' + list.length + '</div><div class="tx">' + (vol ? (vol >= 1000 ? (vol / 1000).toFixed(1) + ' t' : Math.round(vol) + ' kg') : nf(list.reduce((a, b) => a + (Number(b.kcal) || 0), 0)) + ' kcal') + '</div>'
+              : '<div class="mk ph">—</div><div class="tx">' + (rest ? '休息' : '未练') + '</div>') +
+          '</div>';
+        }).join('') + '</div>' +
+        '<div style="font-size:14px;color:var(--muted);margin-top:10px">上排为本周每日实际训练条数与容量 / 消耗，与上面的计划对照看。</div>';
+      })() + '</div>' +
     '</div>' +
 
     '<div class="sec"><div class="sec-hd"><h2>称重记录</h2><span class="note">' + DB.weights.length + ' 条</span></div>' +
@@ -2050,7 +2471,7 @@ VIEWS.setting = function () {
   const size = (() => { try { return (localStorage.getItem(KEY) || '').length; } catch (e) { return 0; } })();
   const counts = [
     ['习惯', DB.habits.length], ['打卡', Object.keys(DB.checkins).reduce((a, k) => a + Object.keys(DB.checkins[k]).length, 0)],
-    ['体重记录', DB.weights.length], ['待买', DB.shopping.length], ['收藏', DB.media.length]
+    ['体重记录', DB.weights.length], ['训练记录', DB.workouts.length], ['待买', DB.shopping.length], ['收藏', DB.media.length]
   ];
   const removed = [['记账记录', DB.money.length], ['日程', DB.schedule.length]];
   return '' +
@@ -2106,7 +2527,7 @@ VIEWS.setting = function () {
         [
           ['今日概览', '启用', '四维生活指数 + 今日习惯快捷打卡'],
           ['习惯健康', '启用', '勾选 / 计数 / 数值打卡，30 天热力图'],
-          ['减脂健身', '启用', '体重体脂、7 日均线、BMI、热量缺口、周计划'],
+          ['减脂健身', '启用', '体重体脂、7 日均线、BMI、训练记录与容量、热量缺口、周计划'],
           ['待买清单', '启用', '优先级、金额合计、已购归档'],
           ['书影音收藏', '启用', '状态、星级、短评、封面墙、年度统计'],
           ['记账理财', '已移除', '小米钱包 AI 自动记账已覆盖流水录入与分类'],
@@ -2156,6 +2577,7 @@ VIEWS.setting = function () {
 function findHabit(id) { return DB.habits.find(x => x.id === id); }
 function findShop(id) { return DB.shopping.find(x => x.id === id); }
 function findMedia(id) { return DB.media.find(x => x.id === id); }
+function findWorkout(id) { return DB.workouts.find(x => x.id === id); }
 
 function habitForm(item) {
   const isEdit = !!item;
@@ -2182,6 +2604,54 @@ function habitForm(item) {
       render();
     }
   });
+}
+function workoutForm(item) {
+  const isEdit = !!item;
+  const last = DB.workouts.slice().reverse().filter(x => x.name && Number(x.weight) > 0)[0];
+  const todayWk = workoutsOf(today());
+  const lastSame = todayWk.length ? todayWk[todayWk.length - 1] : null;
+  openForm({
+    title: isEdit ? '编辑训练' : '记录训练', submitText: isEdit ? '保存' : '添加',
+    danger: isEdit ? '删除' : null,
+    dangerAction: isEdit ? () => { DB.workouts = DB.workouts.filter(x => x.id !== item.id); save(); render(); toast('已删除'); } : null,
+    fields: [
+      { k: 'date', label: '日期', type: 'date', value: isEdit ? item.date : today() },
+      { k: 'spot', label: '训练部位', type: 'select', value: isEdit ? item.spot : (lastSame ? lastSame.spot : '胸'), options: SPOT },
+      { k: 'name', label: '动作名称', type: 'text', required: true, ph: '例如 卧推 / 跑步 / 深蹲',
+        value: isEdit ? item.name : '', hint: '可直接从下方动作库点选，也可自己输入' },
+      { k: 'sets', label: '组数', type: 'number', step: '1', min: '0', value: isEdit && item.sets ? item.sets : '', ph: '留空表示有氧 / 不分组' },
+      { k: 'reps', label: '每组次数', type: 'number', step: '1', min: '0', value: isEdit && item.reps ? item.reps : '' },
+      { k: 'weight', label: '重量 (kg)', type: 'number', step: '0.5', min: '0', value: isEdit && item.weight ? item.weight : '' },
+      { k: 'dur', label: '时长（分钟）', type: 'number', step: '1', min: '0', value: isEdit && item.dur ? item.dur : '' },
+      { k: 'kcal', label: '消耗 (kcal)', type: 'number', step: '10', min: '0', value: isEdit && item.kcal ? item.kcal : '', hint: '留空则按时长自动估算' }
+    ],
+    validate: v => String(v.name).trim() ? null : '请填写动作名称',
+    onSubmit: v => {
+      const rec = {
+        date: v.date || today(),
+        spot: SPOT.indexOf(v.spot) >= 0 ? v.spot : '其他',
+        name: String(v.name).trim().slice(0, 20),
+        sets: Math.max(0, Math.round(Number(v.sets) || 0)),
+        reps: Math.max(0, Math.round(Number(v.reps) || 0)),
+        weight: Math.max(0, Number(v.weight) || 0),
+        dur: Math.max(0, Math.round(Number(v.dur) || 0)),
+        kcal: Math.max(0, Math.round(Number(v.kcal) || 0))
+      };
+      if (isEdit) { Object.assign(item, rec); item.id = item.id || uid(); save(); toast('已保存'); }
+      else { rec.id = uid(); DB.workouts.push(rec); DB.workouts.sort((a, b) => a.date < b.date ? -1 : 1); commit(); toast('已记录 ' + rec.name); }
+      render();
+    }
+  });
+  /* 动作库快捷填入 */
+  const bd = $('.sheet-bd');
+  if (bd) {
+    const cur = isEdit ? item.spot : '胸';
+    const chips = (sp) => '<div class="ex-lib">' + (EX_LIB[sp] || []).map(n =>
+      '<button type="button" data-act="pickEx" data-n="' + esc(n) + '">' + esc(n) + '</button>').join('') + '</div>';
+    bd.insertAdjacentHTML('beforeend',
+      '<div class="field" style="margin-top:2px"><label>动作库</label>' + chips(cur) +
+      '<div style="font-size:13.5px;color:var(--faint)">点选动作名会自动填入上方输入框。</div></div>');
+  }
 }
 function weightForm() {
   const t = today();
@@ -2306,6 +2776,15 @@ const ACTIONS = {
   // 健身
   addWeight: () => weightForm(),
   delWeight: el => { const w = DB.weights.find(x => x.id === el.dataset.id); if (!w) return; DB.weights = DB.weights.filter(x => x.id !== w.id); save(); render(); toast('已删除'); },
+  addWorkout: () => workoutForm(null),
+  editWorkout: el => { const w = findWorkout(el.dataset.id); if (w) workoutForm(w); },
+  delWorkout: el => { const w = findWorkout(el.dataset.id); if (!w) return; DB.workouts = DB.workouts.filter(x => x.id !== w.id); save(); render(); toast('已删除'); },
+  pickEx: el => {
+    const inp = $('input[data-fk="name"]');
+    if (!inp) return;
+    inp.value = el.dataset.n || '';
+    inp.focus();
+  },
   editDay: el => {
     const idx = Number(el.dataset.d);
     const plan = DB.meta.weekplan[idx] || { text: '', done: false };
@@ -2387,6 +2866,24 @@ document.addEventListener('change', e => {
     if (raw !== '' && isFinite(Number(raw)) && Number(raw) >= 0) DB.intake.push({ id: uid(), date: d, kcal: Math.round(Number(raw)) });
     commit(); render(); return;
   }
+  if (act === 'saveBurn') {
+    const raw = String(el.value).trim();
+    const d = today();
+    if (raw === '' || !isFinite(Number(raw)) || Number(raw) < 0) { render(); return; }
+    const k = Math.round(Number(raw));
+    const ws = workoutsOf(d);
+    if (!ws.length) {
+      /* 没有训练记录时，补一条纯消耗条目，让数据有落点 */
+      DB.workouts.push({ id: uid(), date: d, spot: '有氧', name: '运动消耗', sets: 0, reps: 0, weight: 0, dur: 0, kcal: k });
+    } else {
+      /* 把差额记在当日首条上，其余清零，避免重复累加 */
+      const base = ws.reduce((a, b) => a + (Number(b.kcal) || 0), 0);
+      ws.forEach(x => { if (!x.est) x.kcal = 0; });
+      ws[0].kcal = k;
+    }
+    DB.workouts.sort((a, b) => a.date < b.date ? -1 : 1);
+    commit(); render(); return;
+  }
 }, false);
 
 document.addEventListener('input', e => {
@@ -2436,7 +2933,7 @@ function init() {
       '当前环境（可能是无痕模式或隐私设置）无法保存数据，关闭页面后内容会丢失。可以正常使用，但请随时导出 JSON 备份。',
       [{ t: '导出备份', a: 'exportJSON' }]);
   } else {
-    const empty = !DB.money.length && !DB.habits.length && !DB.media.length && !DB.schedule.length && !DB.shopping.length && !DB.weights.length && !DB.intake.length;
+    const empty = !DB.money.length && !DB.habits.length && !DB.media.length && !DB.schedule.length && !DB.shopping.length && !DB.weights.length && !DB.intake.length && !DB.workouts.length;
     if (empty) {
       seedDemo();
       banner('demo', 'info', '先给你放了一份演示数据',

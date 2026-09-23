@@ -21,10 +21,11 @@ desktop.ini
 *.log
 *.bak
 
-# 本地测试脚本
+# 本地测试脚本与预览产物
 _check.js
 _smoke.js
 _*.js
+_preview*.html
 
 # 工作区元数据（不提交）
 .workbuddy-ai/
