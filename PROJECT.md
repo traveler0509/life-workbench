@@ -8,7 +8,7 @@
 
 **生活工作台** —— 单文件、零依赖、纯本地的个人生活管理工作台。
 
-- 主文件：`生活工作台.html`（约 2460 行 / 147 KB，CSS + JS + 图标 + 图表全部内联）
+- 主文件：`生活工作台.html`（约 2900 行 / 190 KB，CSS + JS + 图标 + 图表全部内联）
 - 备份版：`生活工作台-完整版.html`（额外含「记账理财」「日程统筹」，UI 停留在早期版本）
 - 两版**共用同一 localStorage 键 `lifebench.v1`**，精简版保存时会把被移除模块的数据原样写回，不会丢
 
@@ -28,7 +28,7 @@
 |---|---|---|
 | 今日概览 | 启用 | 四维生活指数、时间进度、今天要处理、近 30 天节奏、本周小结、最近动态 |
 | 习惯健康 | 启用 | 三种打卡方式、30 天热力图、加权近因评分 |
-| 减脂健身 | 启用 | 体重体脂、7 日均线、BMI、目标进度、训练记录与容量趋势、动作进步、热量缺口、周计划 |
+| 减脂健身 | 启用 | 体重体脂、7 日均线、BMI、目标进度、训练记录与容量趋势、动作进步、热量缺口、**减脂方案（BMR/TDEE/宏量）**、**饮食计划**、**训练模板一键套用**、周计划 |
 | 待买清单 | 启用 | 优先级分组、金额合计、类别分布 |
 | 书影音收藏 | 启用 | 状态/星级/短评、封面墙与列表、年度小结 |
 | 数据与设置 | 启用 | 个人参数、模块状态、备份恢复 |
@@ -42,12 +42,19 @@
 ```js
 {
   v: 1,
-  meta: { nick, height, tdee, goalFrom, goalTo, weekplan[7], sinceBackup, lastBackup, ... },
+  meta: {
+    nick, height, tdee, budget, goalFrom, goalTo, weekplan[7], sinceBackup, lastBackup,
+    // 减脂方案参数
+    sex:'male'|'female', age:null|number, activity:1.2~1.9,
+    goalMode:'cut'|'maintain'|'gain', deficit:kcal,
+    proteinPerKg:2.0, fatPerKg:0.9, carbCycle:true
+  },
   habits:   [{ id, name, type:'check'|'count'|'number', target, unit, color }],
   checkins: { [habitId]: { 'YYYY-MM-DD': number } },
   weights:  [{ id, date, weight, fat }],
   intake:   [{ id, date, kcal }],
   workouts: [{ id, date, spot, name, sets, reps, weight, dur, kcal, note }],
+  templates:[{ id, name, note, builtin, days:[{ title, items:[{ spot, name, sets, reps, weight, dur }] }] }],
   shopping: [{ id, name, price, cat, pri, bought, boughtAt }],
   media:    [{ id, type:'book'|'movie'|'music', title, creator, year, status, rating, review, cover, date }],
   money:    [],   // 已移除模块，仅保留数据
@@ -56,6 +63,10 @@
 ```
 
 `normalize()` 负责全字段类型清洗与兜底，**新增字段必须同步加进 normalize 的映射**，否则存取一圈会丢。
+
+> ⚠️ **normalize 的铁律（踩过坑）**：函数里必须区分两个对象 —— `def`（`BLANK()` 返回值，只读的默认值基准）与 `base`（`clone(def)` 后的实际返回值）。所有 `num(x, 默认值, …)` 的兜底参数一律引用 **`def.meta.X`**，绝不能引用 `base.meta.X`。
+>
+> 原因：`Object.assign(out.meta, raw.meta)` 会把用户数据写进 `out`（也就是 `base`），一旦兜底值取自 `base`，它就等于用户那笔非法值。曾因此出现「`proteinPerKg:'x'` 清洗后仍是 `'x'`」。`fatPerKg:0` 当时看似正确纯属巧合（`0` 被下限截断成默认值 `0.4`）。
 
 ## 代码架构
 
@@ -102,6 +113,31 @@
 **`isRestDay(plan)`** 用**前缀匹配**判断休息日，`text.indexOf('休息') === 0`。默认计划里是「休息 / 拉伸」，用全等匹配会把它误判成训练日。
 
 **训练日连续周数 `workoutStreakWeeks()`**：本周还没练时宽容跳过（周初正常），但**只宽容本周**，往前的任一空周即终止。用 `DB.workouts` 里的**最小日期**做下界，不能用 `workouts[0]`（它只是当前顺序的首条）。
+
+## 减脂方案（营养计算）
+
+**BMR · Mifflin-St Jeor**
+```
+男性：BMR = 10×kg + 6.25×cm − 5×age − 5
+女性：BMR = 10×kg + 6.25×cm − 5×age − 161
+```
+缺体重 / 身高 / 年龄任一 → 返回 `null`（不返回 `NaN`）。`cutPlan()` 在 `bmr === null` 或无体重时整体返回 `null`，视图据此显示引导文案。
+
+**TDEE** = `BMR × 活动系数`，系数取自 `ACTIVITY_LV`（1.2 / 1.375 / 1.55 / 1.725 / 1.9）。
+
+**宏量分配 `macroSplit(kcal, kg)`** —— 蛋白与脂肪按体重定量，碳水补足剩余热量：
+```
+protein = proteinPerKg × kg      (默认 2.0 g/kg → 4 kcal/g)
+fat     = fatPerKg     × kg      (默认 0.9 g/kg → 9 kcal/g)
+carb    = max(0, (kcal − protein×4 − fat×9) / 4)
+```
+若 `kcal` 低于蛋白 + 脂肪的基本需求，返回对象带 `neg: true`，视图显示警告。
+
+**碳水循环**：训练日 `target + 150` kcal（全给碳水），休息日 `target − 150`，周均不变。可由 `meta.carbCycle` 关闭。
+
+**预计速度**：`缺口 × 7 / 7700` kg/周（7700 kcal ≈ 1 kg 脂肪）。
+
+**训练模板 `FAT_TEMPLATES`**：内置「减脂 5 天分化」「减脂 3 天全身」，每个动作带 `r`（相对重量占比）。`instantiateTpl()` 用 `lastWeightOf(name)` 取该动作最近一次实际重量 × `r`，四舍五入到 0.5 kg；无历史记录则留 `0` 由用户填。套用后存入 `DB.templates`，可「记为今日训练」或「写入本周计划」。
 
 ## 习惯评分算法
 
@@ -158,15 +194,18 @@ const js=src.slice(src.indexOf('<script>')+8, src.lastIndexOf('</scr'+'ipt>'));
 - 字号：全站无 `<12px`、层级严格递减、移动端块位置正确
 - 空数据下所有函数不抛错
 - **训练模块**：容量公式、`burnOf` 三级回退、缺口含运动项、`weekRange(ref)` 传参、`isRestDay` 前缀匹配、`workoutStreakWeeks` 不越界与断档终止
+- **减脂模块**：BMR 精确值（男性 70/175/25 → 1663.75；女性 55/165/30 → 1270.25）、TDEE 含活动系数、蛋白/脂肪 g/kg 定量、碳水补足且三大营养素热量合计 ≈ 目标、训练日 − 休息日 = 300 kcal、`mealPlan` 合计 ≈ 目标且 `0`/`null` 返回空数组、缺参数返回 `null`、极端缺口标 `neg`、模板 `r` 换算带上次重量、模板经 normalize 往返不丢字段
+- **normalize 污染回归**：`proteinPerKg:'x'` → `2`（而非 `'x'`），且**连续两次调用默认值不漂移**（原 bug 的直接症状）
 
 > 写测试时注意：断言里要**同时打出具测量值**（如 `'计划 N 天 (' + v + ')'`），否则失败时看不出是代码错还是期望值错——本次有两个失败项就是期望值写错而非代码错。
 
 ## 已知遗留
 
-1. `生活工作台-完整版.html` 是**早期 UI**，后几轮的改进（信息密度、习惯评分、字号层级、训练记录）**没有回移**。如果要，需要把它当独立文件同步
+1. `生活工作台-完整版.html` 是**早期 UI**，后几轮的改进（信息密度、习惯评分、字号层级、训练记录、减脂方案）**没有回移**。如果要，需要把它当独立文件同步
 2. 无截图。README 里可以补
 3. 手机上用 `file://` 打开时 localStorage 可能不持久，建议「添加到桌面」或后续做成 WebView 套壳 APK
 4. `workouts.note` 字段已在数据结构与 normalize 里预留，但表单尚未开放输入
+5. 减脂方案的宏量百分比在餐次示例里用的是固定 28/45/27 比例，与 `cutPlan()` 按 g/kg 算出的实际比例可能略有出入（示例只用于给餐次结构参考）
 
 ## 下一步可以做什么
 
@@ -174,4 +213,5 @@ const js=src.slice(src.indexOf('<script>')+8, src.lastIndexOf('</scr'+'ipt>'));
 - 补 README 截图
 - 打包成 Android APK（参考 [self-life](https://github.com/Donk567-god/self-life) 的 WebView 套壳做法）
 - 从豆瓣/IMDb 导入书影音数据（参考 [Yamtrack](https://github.com/FuzzyGrim/Yamtrack)）
-- 训练模块可继续扩展：训练模板（一键套用某天动作组合）、休息计时器、组间记录
+- 训练模块可继续扩展：休息计时器、组间记录、自定义模板编辑（当前只能套用内置模板）
+- 饮食：接入食物库做「按克数记账」，替代当前按餐次估算

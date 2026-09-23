@@ -337,6 +337,42 @@ svg.auto-svg{width:100%;height:auto;display:block}
 .ex-card .nw{font-family:var(--serif);font-size:22px;color:var(--ink);line-height:1.25}
 .ex-card .nw em{font-style:normal;font-size:13px;color:var(--muted);font-family:var(--sans);margin-left:2px}
 .ex-card .ft{display:flex;align-items:baseline;gap:8px;font-size:13.5px;color:var(--muted);margin-top:1px}
+
+/* ============ 减脂方案 / 饮食 / 训练模板 ============ */
+.meal-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:11px}
+.meal{border:1px solid var(--line);border-radius:var(--r-s);padding:12px 13px;background:var(--card)}
+.meal .hd{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+.meal .hd b{font-size:15px;font-weight:500}
+.meal .hd .num{margin-left:auto;font-family:var(--serif);font-size:14.5px;color:var(--accent);flex:0 0 auto}
+.meal .ds{font-size:14px;color:var(--ink-2);line-height:1.6;margin-bottom:8px}
+.meal .mac{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px}
+.meal .mac span{font-size:12.5px;color:var(--ink-3);background:var(--paper-3);border-radius:6px;padding:2px 8px}
+.meal .nt{font-size:13px;color:var(--faint);line-height:1.55;border-top:1px dashed var(--line-2);padding-top:7px}
+.swap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:11px}
+.sw-card .gh{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:.02em}
+.sw-items{display:flex;flex-wrap:wrap;gap:6px}
+.sw-items span{font-size:13px;color:var(--ink-2);background:var(--paper-3);border-radius:7px;padding:4px 9px;line-height:1.4}
+.tpl-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.tpl-card{border:1px solid var(--line);border-radius:var(--r-s);padding:14px 15px;background:var(--card);display:flex;flex-direction:column;gap:9px}
+.tpl-card.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.tpl-card .hd{display:flex;align-items:center;gap:9px}
+.tpl-card .hd b{font-size:16px;font-weight:600}
+.tpl-card .nt{font-size:13.5px;color:var(--muted);line-height:1.6}
+.tpl-card .tl{display:flex;flex-wrap:wrap;gap:5px}
+.tpl-card .tl span{font-size:12.5px;color:var(--ink-3);background:var(--paper-3);border-radius:6px;padding:2px 8px}
+.tpl-card .ft{margin-top:auto}
+.tpl-days{display:flex;flex-direction:column;gap:11px}
+.tpl-day{border:1px solid var(--line-2);border-radius:var(--r-s);padding:11px 12px;background:var(--paper-2)}
+.tpl-day .dh{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.tpl-day .dh b{font-size:14.5px;font-weight:600;color:var(--ink)}
+.tpl-day .di{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}
+.tpl-day .ex{display:inline-flex;align-items:baseline;gap:5px;font-size:13px;background:var(--card);border:1px solid var(--line-2);border-radius:7px;padding:3px 9px}
+.tpl-day .ex em{font-style:normal;color:var(--ink-2)}
+.tpl-day .ex b{font-family:var(--serif);font-size:12.5px;color:var(--muted);font-weight:400}
+.tpl-day .ex i{font-style:normal;font-family:var(--serif);font-size:12.5px;color:var(--accent)}
+.tpl-day .acts{display:flex;gap:8px;flex-wrap:wrap}
+.tpl-day .acts button{font-size:13px;padding:5px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink-3);transition:.15s}
+.tpl-day .acts button:hover{border-color:var(--accent);color:var(--accent)}
 .plan-badge{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;color:var(--ink-3);background:var(--paper-3);border-radius:8px;padding:5px 11px}
 .plan-badge b{font-family:var(--serif);font-size:14.5px;color:var(--ink)}
 .plan-badge.on{background:var(--green-soft);color:var(--green)}
@@ -529,6 +565,11 @@ svg.auto-svg{width:100%;height:auto;display:block}
   .empty{font-size:14px}
   .tag{font-size:13.5px}
   .btn.mini{font-size:14px}
+  .meal-list{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+  .swap-grid{grid-template-columns:1fr}
+  .tpl-row{grid-template-columns:1fr}
+  .meal .ds,.meal .nt{font-size:13.5px}
+  .tpl-card .nt,.tpl-day .dh b{font-size:14px}
 }
 @media(max-width:560px){
   .g2,.g3{grid-template-columns:1fr}
@@ -617,6 +658,109 @@ const EX_LIB = {
   '其他': ['拉伸', '瑜伽', '康复训练']
 };
 
+/* ---------- 减脂内置训练模板 ----------
+   5 天分化：胸+三头 / 背+二头 / 休息 / 肩+核心 / 腿 / 有氧 / 休息
+   r 为「相对重量占比」：套用时 = 用户该动作最近一次重量 × r（首次无记录则留空由用户填）
+   dur 用于有氧动作（分钟） */
+const FAT_TEMPLATES = [{
+  id: 'fat5',
+  name: '减脂 5 天分化',
+  note: '经典推拉腿+肩，每周 5 练 2 休，适合有健身房条件',
+  builtin: true,
+  days: [
+    { title: 'Day 1 · 胸 + 三头', items: [
+      { spot: '胸', name: '卧推', sets: 4, reps: 8, r: 1 },
+      { spot: '胸', name: '上斜卧推', sets: 3, reps: 10, r: 0.78 },
+      { spot: '胸', name: '哑铃飞鸟', sets: 3, reps: 12, r: 0.32 },
+      { spot: '手臂', name: '绳索下压', sets: 3, reps: 12, r: 0.45 }
+    ] },
+    { title: 'Day 2 · 背 + 二头', items: [
+      { spot: '背', name: '高位下拉', sets: 4, reps: 10, r: 1 },
+      { spot: '背', name: '坐姿划船', sets: 3, reps: 10, r: 0.95 },
+      { spot: '背', name: '直臂下压', sets: 3, reps: 12, r: 0.4 },
+      { spot: '手臂', name: '哑铃弯举', sets: 3, reps: 12, r: 0.3 }
+    ] },
+    { title: 'Day 3 · 休息 / 拉伸', items: [
+      { spot: '其他', name: '拉伸', dur: 20 }
+    ] },
+    { title: 'Day 4 · 肩 + 核心', items: [
+      { spot: '肩', name: '站姿推举', sets: 4, reps: 8, r: 1 },
+      { spot: '肩', name: '哑铃侧平举', sets: 4, reps: 15, r: 0.18 },
+      { spot: '肩', name: '面拉', sets: 3, reps: 15, r: 0.5 },
+      { spot: '核心', name: '平板支撑', sets: 3, reps: 0, r: 0, dur: 1 }
+    ] },
+    { title: 'Day 5 · 腿', items: [
+      { spot: '腿', name: '深蹲', sets: 4, reps: 8, r: 1 },
+      { spot: '腿', name: '腿举', sets: 3, reps: 12, r: 1.6 },
+      { spot: '腿', name: '腿弯举', sets: 3, reps: 12, r: 0.6 },
+      { spot: '腿', name: '提踵', sets: 4, reps: 15, r: 0.7 }
+    ] },
+    { title: 'Day 6 · 有氧', items: [
+      { spot: '有氧', name: '快走', dur: 45 }
+    ] },
+    { title: 'Day 7 · 休息', items: [
+      { spot: '其他', name: '拉伸', dur: 20 }
+    ] }
+  ]
+}, {
+  id: 'fat3',
+  name: '减脂 3 天全身',
+  note: '全身循环，每周 3 练，适合时间紧张或居家训练',
+  builtin: true,
+  days: [
+    { title: 'Day 1 · 全身 A', items: [
+      { spot: '全身', name: '壶铃摇摆', sets: 4, reps: 15, r: 1 },
+      { spot: '胸', name: '俯卧撑', sets: 3, reps: 12, r: 0 },
+      { spot: '腿', name: '深蹲', sets: 3, reps: 15, r: 0 },
+      { spot: '核心', name: '卷腹', sets: 3, reps: 20, r: 0 }
+    ] },
+    { title: '休息 / 有氧', items: [
+      { spot: '有氧', name: '快走', dur: 40 }
+    ] },
+    { title: 'Day 2 · 全身 B', items: [
+      { spot: '全身', name: '波比跳', sets: 4, reps: 12, r: 0 },
+      { spot: '背', name: '引体向上', sets: 3, reps: 8, r: 0 },
+      { spot: '肩', name: '哑铃侧平举', sets: 3, reps: 15, r: 0 },
+      { spot: '核心', name: '平板支撑', sets: 3, reps: 0, dur: 1 }
+    ] },
+    { title: '休息 / 有氧', items: [
+      { spot: '有氧', name: '椭圆机', dur: 40 }
+    ] },
+    { title: 'Day 3 · 全身 C', items: [
+      { spot: '腿', name: '保加利亚分腿蹲', sets: 3, reps: 12, r: 0 },
+      { spot: '胸', name: '双杠臂屈伸', sets: 3, reps: 10, r: 0 },
+      { spot: '背', name: '坐姿划船', sets: 3, reps: 12, r: 0 },
+      { spot: '核心', name: '俄罗斯转体', sets: 3, reps: 20, r: 0 }
+    ] },
+    { title: '休息', items: [
+      { spot: '其他', name: '拉伸', dur: 20 }
+    ] },
+    { title: '休息', items: [
+      { spot: '其他', name: '拉伸', dur: 20 }
+    ] }
+  ]
+}];
+/* 动作「最近一次」重量，用于套用模板时预填 */
+function lastWeightOf(name) {
+  const hit = DB.workouts.filter(x => x.name === name && Number(x.weight) > 0);
+  if (!hit.length) return 0;
+  hit.sort((a, b) => a.date < b.date ? -1 : 1);
+  return Number(hit[hit.length - 1].weight) || 0;
+}
+/* 内置模板按用户实际重量实例化 */
+function instantiateTpl(tpl) {
+  return {
+    id: tpl.id, name: tpl.name, note: tpl.note, builtin: true, demo: false,
+    days: tpl.days.map(d => ({
+      title: d.title,
+      items: d.items.map(i => {
+        const w = i.r ? Math.round(lastWeightOf(i.name) * i.r * 2) / 2 : 0;
+        return { spot: i.spot, name: i.name, sets: i.sets || 0, reps: i.reps || 0, weight: w, dur: i.dur || 0 };
+      })
+    }))
+  };
+}
+
 const ICON = {
   home: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9.5 20v-6h5v6"/>',
   wallet: '<rect x="2.5" y="6" width="19" height="13" rx="2.5"/><path d="M2.5 10h19"/><circle cx="17" cy="14.5" r="1.2"/>',
@@ -643,7 +787,8 @@ const ICON = {
   list: '<path d="M8 6.5h12M8 12h12M8 17.5h12M4 6.5v.1M4 12v.1M4 17.5v.1"/>',
   spark: '<path d="M12 3.5l1.7 5.1 5.1 1.7-5.1 1.7L12 17.1l-1.7-5.1L5.2 10.3l5.1-1.7z"/>',
   chev: '<path d="M9.5 6l6 6-6 6"/>'
-};const ic = (n, cls) => '<svg class="' + (cls || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">' + (ICON[n] || '') + '</svg>';
+};
+const ic = (n, cls) => '<svg class="' + (cls || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">' + (ICON[n] || '') + '</svg>';
 
 const PALETTE = ['#A8452A', '#4E6B57', '#3E5C76', '#A07C2C', '#6E4A5C', '#8A6A3B', '#5A6B7C', '#B06A46', '#4B6B63', '#7A5A46'];
 /* ==========================================================
@@ -653,6 +798,8 @@ const BLANK = () => ({
   v: 1,
   meta: {
     nick: '', height: 172, tdee: 2050, budget: 6000,
+    sex: 'male', age: null, activity: 1.375, goalMode: 'cut', deficit: 400,
+    proteinPerKg: 2.0, fatPerKg: 0.9, carbCycle: true,
     goalFrom: null, goalTo: null,
     weekplan: [
       { text: '有氧 40 分钟', done: false }, { text: '力量 · 上肢', done: false },
@@ -663,7 +810,7 @@ const BLANK = () => ({
     sinceBackup: 0, lastBackup: null, seenDemo: false, weekStart: null
   },
   money: [], habits: [], checkins: {}, weights: [], intake: [], workouts: [],
-  schedule: [], shopping: [], media: []
+  templates: [], schedule: [], shopping: [], media: []
 });
 
 let DB = BLANK();
@@ -671,14 +818,41 @@ let storageOK = true;
 let corruptRaw = null;
 let S = { view: 'index', mediaView: 'wall', mediaFilter: 'all', mediaYear: String(new Date().getFullYear()), shopShowBought: true };
 
+function clone(o) {
+  if (Array.isArray(o)) return o.map(clone);
+  if (o && typeof o === 'object') {
+    const r = {};
+    for (const k in o) if (Object.prototype.hasOwnProperty.call(o, k)) r[k] = clone(o[k]);
+    return r;
+  }
+  return o;
+}
+
 function normalize(raw) {
-  const base = BLANK();
-  if (!raw || typeof raw !== 'object') return base;
+  const def = BLANK();          /* 默认值基准：必须保持“干净”，永远不被写入 */
+  if (!raw || typeof raw !== 'object') return def;
+  const base = clone(def);      /* 实际返回值：与默认值基准隔离，避免污染兜底值 */
   const out = base;
   out.v = raw.v || 1;
   if (raw.meta && typeof raw.meta === 'object') Object.assign(out.meta, raw.meta);
-  if (!Array.isArray(out.meta.weekplan) || out.meta.weekplan.length !== 7) out.meta.weekplan = base.meta.weekplan;
-  ['money', 'habits', 'weights', 'intake', 'workouts', 'schedule', 'shopping', 'media'].forEach(k => {
+  if (!Array.isArray(out.meta.weekplan) || out.meta.weekplan.length !== 7) out.meta.weekplan = def.meta.weekplan;
+  /* meta 数值清洗：越界或非数值回落到默认，避免 BMR 计算出 NaN */
+  const num = (v, def, lo, hi) => {
+    const n = Number(v);
+    if (!isFinite(n) || v === '' || v == null) return def;
+    return clamp(n, lo, hi);
+  };
+  out.meta.height = num(out.meta.height, def.meta.height, 80, 250);
+  out.meta.tdee = num(out.meta.tdee, def.meta.tdee, 800, 6000);
+  out.meta.sex = out.meta.sex === 'female' ? 'female' : 'male';
+  out.meta.age = (out.meta.age === '' || out.meta.age == null || !isFinite(Number(out.meta.age))) ? null : clamp(Math.round(Number(out.meta.age)), 10, 100);
+  out.meta.activity = num(out.meta.activity, def.meta.activity, 1.2, 1.9);
+  out.meta.goalMode = out.meta.goalMode === 'maintain' ? 'maintain' : (out.meta.goalMode === 'gain' ? 'gain' : 'cut');
+  out.meta.deficit = num(out.meta.deficit, def.meta.deficit, 0, 1000);
+  out.meta.proteinPerKg = num(out.meta.proteinPerKg, def.meta.proteinPerKg, 1, 3.5);
+  out.meta.fatPerKg = num(out.meta.fatPerKg, def.meta.fatPerKg, 0.4, 2);
+  out.meta.carbCycle = out.meta.carbCycle !== false;
+  ['money', 'habits', 'weights', 'intake', 'workouts', 'templates', 'schedule', 'shopping', 'media'].forEach(k => {
     if (Array.isArray(raw[k])) out[k] = raw[k].filter(x => x && typeof x === 'object');
     else out[k] = [];
   });
@@ -710,6 +884,22 @@ function normalize(raw) {
     kcal: Math.max(0, Math.round(Number(x.kcal) || 0)),
     note: String(x.note || '').slice(0, 60), demo: !!x.demo
   })).sort((a, b) => a.date < b.date ? -1 : 1);
+  /* 训练模板：{ id, name, note, days: [{ title, items: [{ spot, name, sets, reps }] }] } */
+  out.templates = out.templates.filter(x => x && x.name && Array.isArray(x.days)).map(x => ({
+    id: x.id || uid(), name: String(x.name).slice(0, 24), note: String(x.note || '').slice(0, 60),
+    builtin: !!x.builtin, demo: !!x.demo,
+    days: x.days.filter(d => d && Array.isArray(d.items)).map(d => ({
+      title: String(d.title || '').slice(0, 30),
+      items: d.items.filter(i => i && i.name).map(i => ({
+        spot: SPOT.indexOf(i.spot) >= 0 ? i.spot : '其他',
+        name: String(i.name).slice(0, 20),
+        sets: Math.max(0, Math.round(Number(i.sets) || 0)),
+        reps: Math.max(0, Math.round(Number(i.reps) || 0)),
+        weight: Math.max(0, Number(i.weight) || 0),
+        dur: Math.max(0, Math.round(Number(i.dur) || 0))
+      }))
+    }))
+  })).filter(x => x.days.length);
   out.schedule = out.schedule.filter(x => x && x.title).map(x => ({
     id: x.id || uid(), date: x.date || today(), time: x.time || '', title: String(x.title).slice(0, 60),
     cat: x.cat || '生活', pri: ['高', '中', '低'].indexOf(x.pri) >= 0 ? x.pri : '中', done: !!x.done, demo: !!x.demo
@@ -1157,6 +1347,89 @@ function planThisWeek() {
   const actual = workoutStats(7).days;
   return { planned: planned, doneDone: done, actual: actual, from: r.from, to: r.to };
 }
+/* ---------- 减脂方案（Mifflin-St Jeor + 宏量分配） ----------
+   BMR = 10·体重 + 6.25·身高 − 5·年龄 + (男 −5 / 女 −161)
+   TDEE = BMR × 活动系数；目标热量 = TDEE − 缺口
+   宏量：蛋白质 2.0 g/kg、脂肪 0.9 g/kg 优先，碳水补足剩余热量
+   训练日 / 休息日碳水循环：训练日 +150 kcal 碳水，休息日同额扣减 */
+const ACTIVITY_LV = [
+  { v: 1.2, t: '久坐（几乎不运动）' },
+  { v: 1.375, t: '轻度（每周 1–3 次）' },
+  { v: 1.55, t: '中度（每周 3–5 次）' },
+  { v: 1.725, t: '高度（每周 6–7 次）' },
+  { v: 1.9, t: '极高（体力工作 + 训练）' }
+];
+const GOAL_MODES = { cut: '减脂', maintain: '维持', gain: '增肌' };
+function bmrOf() {
+  const m = DB.meta;
+  const w = latestWeight();
+  const kg = w ? Number(w.weight) : null;
+  const h = Number(m.height), a = m.age;
+  if (!kg || !(h > 0) || a == null) return null;
+  const base = 10 * kg + 6.25 * h - 5 * Number(a);
+  return Math.round(base + (m.sex === 'female' ? -161 : -5));
+}
+function tdeeCalc() {
+  const bmr = bmrOf();
+  if (bmr == null) return null;
+  return Math.round(bmr * (Number(DB.meta.activity) || 1.375));
+}
+/* 宏量分配：返回克数与热量，蛋白/脂肪优先，碳水补足 */
+function macroSplit(kcal, kg) {
+  const m = DB.meta;
+  const p = Math.round((Number(m.proteinPerKg) || 2) * kg);
+  const f = Math.round((Number(m.fatPerKg) || 0.9) * kg);
+  const pK = p * 4, fK = f * 9;
+  const left = kcal - pK - fK;
+  const c = Math.max(0, Math.round(left / 4));
+  const total = pK + fK + c * 4;
+  return { protein: p, fat: f, carb: c, pK: pK, fK: fK, cK: c * 4, total: total, kcal: kcal, neg: left < 0 };
+}
+function cutPlan() {
+  const tdee = tdeeCalc();
+  const w = latestWeight();
+  const kg = w ? Number(w.weight) : null;
+  if (tdee == null || !kg) return null;
+  const mode = DB.meta.goalMode || 'cut';
+  const def = mode === 'cut' ? (Number(DB.meta.deficit) || 400) : (mode === 'gain' ? -(Number(DB.meta.deficit) || 300) : 0);
+  const target = Math.round(tdee - def);
+  const trainK = DB.meta.carbCycle ? target + 150 : target;
+  const restK = DB.meta.carbCycle ? target - 150 : target;
+  const train = macroSplit(trainK, kg), rest = macroSplit(restK, kg), avg = macroSplit(target, kg);
+  return {
+    bmr: bmrOf(), tdee: tdee, target: target, deficit: def, mode: mode, kg: kg,
+    train: train, rest: rest, avg: avg,
+    weekly: Math.round(def * 7), fatPerWeek: Math.round(def * 7 / 7700 * 100) / 100,
+    pKcal: avg.protein * 4, cKcal: avg.carb * 4, fKcal: avg.fat * 9,
+    pPct: Math.round(avg.protein * 4 / Math.max(1, avg.total) * 100),
+    cPct: Math.round(avg.carb * 4 / Math.max(1, avg.total) * 100),
+    fPct: Math.round(avg.fat * 9 / Math.max(1, avg.total) * 100)
+  };
+}
+/* 一日餐次示例（按目标热量等比例缩放 5 餐） */
+const MEAL_PLAN = [
+  { t: '早餐', s: '全蛋 + 燕麦 + 水果', r: 0.24, note: '蛋白质 25g 起，稳住上午血糖' },
+  { t: '午餐', s: '鸡胸 / 瘦牛 + 杂粮饭 + 大量蔬菜', r: 0.26, note: '主食占全天碳水的大头' },
+  { t: '训前加餐', s: '全麦面包 + 花生酱 或 一份水果', r: 0.14, note: '训练前 1–2 小时吃，保证训练表现' },
+  { t: '训后', s: '乳清蛋白 + 快碳（燕麦 / 香蕉）', r: 0.16, note: '练完 1 小时内补，帮助恢复' },
+  { t: '晚餐', s: '鱼 / 虾 + 薯类 + 蔬菜', r: 0.20, note: '碳水收尾，睡前以蛋白质为主' }
+];
+function mealPlan(kcal) {
+  if (!kcal) return [];
+  return MEAL_PLAN.map(m => ({
+    t: m.t, s: m.s, note: m.note,
+    kcal: Math.round(kcal * m.r),
+    p: Math.round(kcal * m.r * .28 / 4),
+    c: Math.round(kcal * m.r * .45 / 4),
+    f: Math.round(kcal * m.r * .27 / 9)
+  }));
+}
+/* 食物替换清单：等价替换，方便换着吃 */
+const FOOD_SWAP = [
+  { g: '蛋白质 ≈30g', items: ['鸡胸肉 150g', '瘦牛里脊 150g', '三文鱼 / 鳕鱼 170g', '虾仁 200g', '全蛋 4 个 + 蛋白 2 个', '无糖希腊酸奶 300g', '乳清蛋白 30g + 牛奶 200ml'] },
+  { g: '碳水 ≈50g', items: ['干燕麦 65g', '熟糙米 180g', '熟白米 200g', '红薯 250g', '土豆 300g', '全麦面包 2 片', '干意面 80g'] },
+  { g: '脂肪 ≈15g', items: ['橄榄油 10ml', '混合坚果 30g', '牛油果 1/3 个', '花生酱 20g', '黄油 15g'] }
+];
 function intakeStats() {
   const tdee = Number(DB.meta.tdee) || 0;
   const vals = daysBack(7).map(d => DB.intake.filter(x => x.date === d).reduce((a, b) => a + b.kcal, 0)).filter(v => v > 0);
@@ -2243,6 +2516,92 @@ VIEWS.body = function () {
       '</div>' +
     '</div>' +
 
+    /* ---------- 减脂方案 ---------- */
+    (() => {
+      const cp = cutPlan();
+      const mp = cp ? mealPlan(cp.train.kcal) : [];
+      return '<div class="sec"><div class="sec-hd"><h2>减脂方案</h2>' +
+        '<span class="note">' + (cp ? 'Mifflin-St Jeor 公式估算 · ' + GOAL_MODES[cp.mode] + '模式' : '需要体重 / 身高 / 年龄') + '</span>' +
+        '<span class="spacer"></span>' +
+        '<button class="btn mini" data-act="editBodyMeta">' + ic('gear') + '身体参数</button></div>' +
+        (cp ? '' +
+          '<div class="kpi-row">' +
+            '<div class="kpi"><div class="lb">基础代谢 BMR</div><div class="vl">' + nf(cp.bmr) + '<span style="font-size:13px;color:var(--muted)"> kcal</span></div><div class="sub2">静息状态每日消耗</div></div>' +
+            '<div class="kpi"><div class="lb">每日消耗 TDEE</div><div class="vl">' + nf(cp.tdee) + '<span style="font-size:13px;color:var(--muted)"> kcal</span></div><div class="sub2">BMR × 活动系数</div></div>' +
+            '<div class="kpi"><div class="lb">目标热量</div><div class="vl" style="color:var(--accent)">' + nf(cp.target) + '<span style="font-size:13px;color:var(--muted)"> kcal</span></div><div class="sub2">' + (cp.deficit ? (cp.deficit > 0 ? '每日缺口 ' : '每日盈余 ') + nf(Math.abs(cp.deficit)) + ' kcal' : '维持热量') + '</div></div>' +
+            '<div class="kpi"><div class="lb">预计速度</div><div class="vl">' + (cp.fatPerWeek != null ? signN(cp.mode === 'gain' ? cp.fatPerWeek : -cp.fatPerWeek, 2) : '—') + '<span style="font-size:13px;color:var(--muted)"> kg/周</span></div><div class="sub2">' + (cp.weekly ? '每周约 ' + nf(Math.abs(cp.weekly)) + ' kcal ' + (cp.mode === 'gain' ? '盈余' : '缺口') : '—') + '</div></div>' +
+          '</div>' +
+
+          '<div class="split" style="margin-top:14px">' +
+            '<div class="panel">' +
+              '<div style="font-size:13.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:12px">三大营养素分配（训练日）</div>' +
+              (() => {
+                const t = cp.train;
+                const bar = (lbl, pct, g, color) => '<div style="margin-bottom:12px">' +
+                  '<div style="display:flex;justify-content:space-between;font-size:14.5px;margin-bottom:5px">' +
+                    '<span style="color:var(--ink-2)">' + lbl + '</span>' +
+                    '<span class="num" style="color:var(--muted)">' + g + ' g · ' + pct + '%</span></div>' +
+                  '<div style="height:8px;border-radius:99px;background:var(--paper-3);overflow:hidden">' +
+                    '<i style="display:block;height:100%;border-radius:99px;background:' + color + ';width:' + pct + '%"></i></div></div>';
+                const den = Math.max(1, t.total);
+                return bar('蛋白质', Math.round(t.protein * 4 / den * 100), t.protein, 'var(--accent)') +
+                       bar('碳水', Math.round(t.carb * 4 / den * 100), t.carb, '#C08A3E') +
+                       bar('脂肪', Math.round(t.fat * 9 / den * 100), t.fat, '#4F7A6A');
+              })() +
+              '<div style="font-size:14px;color:var(--muted);border-top:1px solid var(--line-2);padding-top:11px;line-height:1.75">' +
+                '蛋白质按 <b>' + DB.meta.proteinPerKg + ' g/kg</b>、脂肪按 <b>' + DB.meta.fatPerKg + ' g/kg</b> 优先满足（当前体重 ' + cp.kg.toFixed(1) + ' kg），碳水补足剩余热量。' +
+                '减脂期蛋白质要够，才能尽量保住肌肉。' +
+              '</div>' +
+            '</div>' +
+            '<div class="panel flat">' +
+              '<div style="font-size:13.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:12px">训练日 vs 休息日（碳水循环）</div>' +
+              '<div style="display:flex;gap:10px;margin-bottom:14px">' +
+                '<div style="flex:1;text-align:center;padding:13px 8px;background:var(--paper);border-radius:11px;border:1px solid var(--line-2)">' +
+                  '<div style="font-size:13.5px;color:var(--muted);margin-bottom:6px">训练日</div>' +
+                  '<div class="num" style="font-size:21px;color:var(--accent)">' + nf(cp.train.kcal) + '</div>' +
+                  '<div style="font-size:13.5px;color:var(--faint)">kcal · 碳水 ' + cp.train.carb + 'g</div></div>' +
+                '<div style="flex:1;text-align:center;padding:13px 8px;background:var(--paper);border-radius:11px;border:1px solid var(--line-2)">' +
+                  '<div style="font-size:13.5px;color:var(--muted);margin-bottom:6px">休息日</div>' +
+                  '<div class="num" style="font-size:21px;color:#4F7A6A">' + nf(cp.rest.kcal) + '</div>' +
+                  '<div style="font-size:13.5px;color:var(--faint)">kcal · 碳水 ' + cp.rest.carb + 'g</div></div>' +
+              '</div>' +
+              '<div style="font-size:14px;color:var(--muted);line-height:1.85">' +
+                (DB.meta.carbCycle ? '训练日多给约 <b>150 kcal</b> 碳水，保证训练表现；休息日同额扣减，让周均缺口保持不变。'
+                                   : '碳水循环已关闭，每天热量一致。') +
+                '<br>周均约 <b>' + nf(cp.avg.kcal) + ' kcal</b>，按此吃一周约' + (cp.mode === 'gain' ? '增' : '减') + ' <b>' + (cp.fatPerWeek != null ? cp.fatPerWeek.toFixed(2) : '—') + ' kg</b> 体重（7700 kcal ≈ 1 kg 脂肪）。' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+
+          '<div class="sec-hd" style="margin-top:22px"><h2 style="font-size:17px">一天怎么吃（训练日示例）</h2>' +
+            '<span class="note">' + mp.length + ' 餐 · 合计 ' + nf(mp.reduce((a, b) => a + b.kcal, 0)) + ' kcal</span></div>' +
+          '<div class="meal-list">' + mp.map(m =>
+            '<div class="meal">' +
+              '<div class="hd"><b>' + m.t + '</b><span class="num">' + nf(m.kcal) + ' kcal</span></div>' +
+              '<div class="ds">' + esc(m.s) + '</div>' +
+              '<div class="mac"><span>蛋白 ' + m.p + 'g</span><span>碳水 ' + m.c + 'g</span><span>脂肪 ' + m.f + 'g</span></div>' +
+              '<div class="nt">' + esc(m.note) + '</div>' +
+            '</div>').join('') + '</div>' +
+
+          '<div class="sec-hd" style="margin-top:22px"><h2 style="font-size:17px">食物替换清单</h2>' +
+            '<span class="note">同类等量替换，换着吃不容易腻</span></div>' +
+          '<div class="swap-grid">' + FOOD_SWAP.map(g =>
+            '<div class="panel flat sw-card"><div class="gh">' + esc(g.g) + '</div>' +
+              '<div class="sw-items">' + g.items.map(i => '<span>' + esc(i) + '</span>').join('') + '</div></div>').join('') +
+          '</div>' +
+
+          '<div class="panel flat" style="margin-top:14px"><div style="font-size:14px;color:var(--ink-3);line-height:1.9">' +
+            '<div style="font-weight:600;color:var(--ink);margin-bottom:6px">执行要点</div>' +
+            '① 蛋白质每餐分 4–5 次吃，每次 25–35 g，吸收更稳；<br>' +
+            '② 训练日把碳水往训练前后放，休息日多靠蔬菜和蛋白撑饱腹；<br>' +
+            '③ 每周固定时间称重，看 <b>7 日均线</b> 而不是单日数字；<br>' +
+            '④ 连续两周体重不动，再把缺口加 100–150 kcal，别一次砍太多。' +
+            (cp.train.neg || cp.avg.neg ? '<br><span style="color:var(--accent)">⚠️ 当前缺口偏大，目标热量已低于蛋白质 + 脂肪的基本需求，建议调小缺口。</span>' : '') +
+          '</div></div>'
+        : '<div class="empty">填好身体参数（性别 / 年龄 / 身高 / 体重）后，这里会自动算出你的减脂热量和饮食方案</div>') +
+      '</div>';
+    })() +
+
     '<div class="sec"><div class="sec-hd"><h2>训练分布</h2></div>' +
       '<div class="split">' +
         '<div><div style="font-size:13.5px;letter-spacing:.14em;color:var(--faint);margin-bottom:10px">每周训练容量</div>' +
@@ -2271,6 +2630,45 @@ VIEWS.body = function () {
 
     '<div class="sec"><div class="sec-hd"><h2>体脂趋势</h2></div>' +
       '<div class="panel">' + fatChart + '</div></div>' +
+
+    '<div class="sec"><div class="sec-hd"><h2>训练模板</h2><span class="note">一键套用，自动带上你上次用的重量</span></div>' +
+      '<div class="tpl-row">' + FAT_TEMPLATES.map(tpl => {
+        const applied = DB.templates.some(x => x.id === tpl.id);
+        return '<div class="tpl-card' + (applied ? ' on' : '') + '">' +
+          '<div class="hd"><b>' + esc(tpl.name) + '</b>' + (applied ? '<span class="tag a">已套用</span>' : '') + '</div>' +
+          '<div class="nt">' + esc(tpl.note) + '</div>' +
+          '<div class="tl">' + tpl.days.map(d =>
+            '<span>' + esc(d.title.replace(/^Day \d+ · /, '')) + '</span>').join('') + '</div>' +
+          '<div class="ft"><button class="btn accent mini" data-act="useTemplate" data-id="' + tpl.id + '">' +
+            (applied ? '重新套用' : '套用模板') + '</button></div>' +
+        '</div>';
+      }).join('') + '</div>' +
+
+      (DB.templates.length ? '<div class="sec-hd" style="margin-top:22px"><h2 style="font-size:17px">我的计划</h2>' +
+        '<span class="note">把某一天写进周计划，或直接记成今日训练</span></div>' +
+        DB.templates.map(tpl => '<div class="panel" style="margin-bottom:14px">' +
+          '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap">' +
+            '<b style="font-size:16px">' + esc(tpl.name) + '</b>' +
+            '<span style="font-size:14px;color:var(--muted)">' + esc(tpl.note || '') + '</span>' +
+            '<span class="spacer" style="flex:1"></span>' +
+            (tpl.builtin ? '<span class="tag">内置</span>' : '') +
+            '<button class="icon-btn danger" data-act="delTemplate" data-id="' + tpl.id + '">' + ic('trash') + '</button>' +
+          '</div>' +
+          '<div class="tpl-days">' + tpl.days.map((d, di) => '<div class="tpl-day">' +
+            '<div class="dh"><b>' + esc(d.title) + '</b><span class="spacer" style="flex:1"></span>' +
+              '<span style="font-size:14px;color:var(--muted)">' + d.items.length + ' 个动作</span></div>' +
+            '<div class="di">' + d.items.map(i =>
+              '<span class="ex"><em>' + esc(i.name) + '</em>' +
+                (i.sets && i.reps ? '<b>' + i.sets + '×' + i.reps + '</b>' : '') +
+                (Number(i.weight) > 0 ? '<i>' + i.weight + 'kg</i>' : (i.dur ? '<i>' + i.dur + 'min</i>' : '')) +
+              '</span>').join('') + '</div>' +
+            '<div class="acts">' +
+              '<button data-act="applyDayToday" data-id="' + tpl.id + '" data-d="' + di + '">记为今日训练</button>' +
+              '<button data-act="applyDay" data-id="' + tpl.id + '" data-d="' + di + '" data-w="' + ((todayDow - di) + 7) % 7 + '">写入本周计划</button>' +
+            '</div>' +
+          '</div>').join('') + '</div>' +
+        '</div>').join('') : '') +
+    '</div>' +
 
     '<div class="sec"><div class="sec-hd"><h2>本周训练计划</h2><span class="note">点击卡片可编辑内容</span>' +
       '<span class="spacer"></span><span class="plan-badge' + (planStat.actual >= planStat.planned && planStat.planned ? ' on' : '') + '">' +
@@ -2784,6 +3182,111 @@ const ACTIONS = {
     if (!inp) return;
     inp.value = el.dataset.n || '';
     inp.focus();
+  },
+  editBodyMeta: () => {
+    const m = DB.meta;
+    const w = latestWeight();
+    openForm({
+      title: '身体参数与目标', submitText: '保存',
+      fields: [
+        { k: 'sex', label: '性别', type: 'select', value: m.sex || 'male', options: [{ v: 'male', t: '男' }, { v: 'female', t: '女' }] },
+        { k: 'age', label: '年龄', type: 'number', step: '1', min: '10', max: '100', value: m.age == null ? '' : m.age, ph: '例如 24', hint: '用于计算基础代谢，留空则无法估算' },
+        { k: 'height', label: '身高 (cm)', type: 'number', step: '1', value: m.height, ph: '例如 172' },
+        { k: 'activity', label: '日常活动量', type: 'select', value: m.activity, options: ACTIVITY_LV.map(a => ({ v: a.v, t: a.t })) },
+        { k: 'goalMode', label: '目标模式', type: 'select', value: m.goalMode || 'cut', options: [{ v: 'cut', t: '减脂' }, { v: 'maintain', t: '维持' }, { v: 'gain', t: '增肌' }] },
+        { k: 'deficit', label: '每日热量缺口 (kcal)', type: 'number', step: '50', value: m.deficit, hint: '减脂建议 300–500；增肌填每日盈余' },
+        { k: 'proteinPerKg', label: '蛋白质 (g/kg 体重)', type: 'number', step: '0.1', value: m.proteinPerKg, hint: '减脂建议 1.8–2.2' },
+        { k: 'fatPerKg', label: '脂肪 (g/kg 体重)', type: 'number', step: '0.1', value: m.fatPerKg, hint: '建议 0.8–1.0' },
+        { k: 'carbCycle', label: '训练日 / 休息日碳水循环', type: 'select', value: m.carbCycle ? '1' : '0', options: [{ v: '1', t: '开启（训练日 +150 kcal 碳水）' }, { v: '0', t: '关闭（每天一致）' }] },
+        { k: 'tdee', label: '每日基础消耗 (kcal)', type: 'number', step: '10', value: m.tdee, hint: '手动填写的 TDEE；填了身体参数后可用公式值参考' }
+      ],
+      validate: v => {
+        if (!(Number(v.height) >= 80 && Number(v.height) <= 250)) return '身高需在 80–250 cm 之间';
+        if (v.age !== '' && v.age != null && !(Number(v.age) >= 10 && Number(v.age) <= 100)) return '年龄需在 10–100 之间';
+        return null;
+      },
+      onSubmit: v => {
+        m.sex = v.sex === 'female' ? 'female' : 'male';
+        m.age = (v.age === '' || v.age == null) ? null : clamp(Math.round(Number(v.age)), 10, 100);
+        m.height = clamp(Number(v.height) || m.height, 80, 250);
+        m.activity = clamp(Number(v.activity) || 1.375, 1.2, 1.9);
+        m.goalMode = ['cut', 'maintain', 'gain'].indexOf(v.goalMode) >= 0 ? v.goalMode : 'cut';
+        m.deficit = clamp(Number(v.deficit) || 0, 0, 1000);
+        m.proteinPerKg = clamp(Number(v.proteinPerKg) || 2, 1, 3.5);
+        m.fatPerKg = clamp(Number(v.fatPerKg) || 0.9, 0.4, 2);
+        m.carbCycle = v.carbCycle === '1';
+        m.tdee = clamp(Number(v.tdee) || m.tdee, 800, 6000);
+        save(true); render(); toast('已保存身体参数');
+      }
+    });
+  },
+  // 训练模板
+  useTemplate: el => {
+    const tpl = FAT_TEMPLATES.find(x => x.id === el.dataset.id);
+    if (!tpl) return;
+    const inst = instantiateTpl(tpl);
+    const has = DB.templates.some(x => x.id === tpl.id);
+    if (has) DB.templates = DB.templates.map(x => x.id === tpl.id ? inst : x);
+    else DB.templates.push(inst);
+    save(true); render();
+    toast('已套用「' + tpl.name + '」');
+  },
+  applyDay: el => {
+    const tpl = DB.templates.find(x => x.id === el.dataset.id);
+    if (!tpl) return;
+    const day = tpl.days[Number(el.dataset.d)];
+    if (!day) return;
+    const wd = Number(el.dataset.w);
+    if (WD[wd] !== undefined) {
+      /* 写入本周计划对应星期 */
+      const buf = day.items.map(i => {
+        const n = i.sets && i.reps ? i.sets + '×' + i.reps + ' ' + i.name : i.name;
+        const w = Number(i.weight) > 0 ? ' ' + i.weight + 'kg' : '';
+        return n + w;
+      }).join(' + ');
+      DB.meta.weekplan[wd] = { text: (day.title.replace(/^Day \d+ · /, '') + '：' + buf).slice(0, 60), done: false };
+      save(true); render();
+      toast('已写入周' + WD[wd] + '的计划');
+    } else {
+      /* 未指定星期：整组录入今日训练记录 */
+      const t = today();
+      day.items.forEach(i => {
+        if (!i.name) return;
+        DB.workouts.push({
+          id: uid(), date: t, spot: i.spot, name: i.name,
+          sets: i.sets || 0, reps: i.reps || 0, weight: i.weight || 0,
+          dur: i.dur || 0, kcal: 0, note: '', demo: false
+        });
+      });
+      DB.workouts.sort((a, b) => a.date < b.date ? -1 : 1);
+      commit(); render();
+      toast('已记录 ' + day.items.length + ' 个动作');
+    }
+  },
+  applyDayToday: el => {
+    const tpl = DB.templates.find(x => x.id === el.dataset.id);
+    if (!tpl) return;
+    const day = tpl.days[Number(el.dataset.d)];
+    if (!day) return;
+    const t = today();
+    day.items.forEach(i => {
+      if (!i.name) return;
+      DB.workouts.push({
+        id: uid(), date: t, spot: i.spot, name: i.name,
+        sets: i.sets || 0, reps: i.reps || 0, weight: i.weight || 0,
+        dur: i.dur || 0, kcal: 0, note: '', demo: false
+      });
+    });
+    DB.workouts.sort((a, b) => a.date < b.date ? -1 : 1);
+    commit(); render();
+    toast('已记录今日 ' + day.items.length + ' 个动作');
+  },
+  delTemplate: el => {
+    const t = DB.templates.find(x => x.id === el.dataset.id);
+    if (!t) return;
+    if (t.builtin) { toast('内置模板不可删除'); return; }
+    DB.templates = DB.templates.filter(x => x.id !== t.id);
+    save(true); render(); toast('已删除模板');
   },
   editDay: el => {
     const idx = Number(el.dataset.d);
